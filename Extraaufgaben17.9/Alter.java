@@ -11,8 +11,8 @@ public class Alter{
         jahr = scan.nextInt();
         System.out.println("In welchem Jahr wurdest du geboren?");
         gjahr = scan.nextInt();
-        alterv = jahr - gjahr -1;
-        alterd = alterv+1;
+        alterd = jahr - gjahr;
+        alterv = alterd-1;
         System.out.println(name+", wenn du heuer noch nicht Geburtstag hattest, bist du " + alterv +" Jahre alt, ansonsten bist du " +alterd);
     }
 }
