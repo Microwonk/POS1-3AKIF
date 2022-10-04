@@ -1,8 +1,6 @@
-import java.net.SocketTimeoutException;
-
 public class Funktionstabellen {
     public static void main(String[] args) {
-
+        
         boolean a, b, c;
         a= true;
         b= false;
