@@ -2,14 +2,13 @@ import java.util.Scanner;
 
 public class Ohm {
     public static void main(String[] args) {
-        int u, r;
-        double i;
+        double i, u, r;
         Scanner s = new Scanner(System.in);
         System.out.println("Gib U an:");
-        u = s.nextInt();
+        u = s.nextDouble();
         System.out.println("Gib R an:");
-        r = s.nextInt();
-        i = (u+0.0)/r;
+        r = s.nextDouble();
+        i = u/r;
         System.out.println("Die Stromstaerke betraegt: " +i);
     }
 }
