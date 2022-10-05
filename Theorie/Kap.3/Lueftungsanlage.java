@@ -10,11 +10,17 @@ public class Lueftungsanlage {
         System.out.println("Geben Sie die Luftfeuchtigkeit ein:");
             luft = s.nextInt();
 
-        if ((temp<12||temp>24&&temp<50)||(luft>65)) {
-            System.out.println("Der Luefter wird aktiviert.");
+        if ((luft>0&&luft<=100)&&(temp>=-100&&temp<=70)) {
+            
+            if ((temp<12||temp>24&&temp<50)||(luft>65)) {
+                System.out.println("Der Luefter wird aktiviert.");
+            }
+            else {
+                System.out.println("Der Luefter wird nicht aktiviert.");
+            }
         }
         else {
-            System.out.println("Der Luefter wird nicht aktiviert.");
+            System.out.println("Bitte geben Sie realistische Werte ein!");
         }
     }
 }
