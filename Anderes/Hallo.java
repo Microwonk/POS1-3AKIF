@@ -1,4 +1,4 @@
-class Hello
+class Hallo
 {
     public static void main(String[] args) //funktion oder methode namens main, welche hauptmethode ist ()heißen sind Parameter
     {  
