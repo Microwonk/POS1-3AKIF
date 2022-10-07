@@ -16,5 +16,6 @@ public class Lueftungsanlage {
         else {
             System.out.println("Der Luefter wird nicht aktiviert.");
         }
+        s.close();
     }
 }

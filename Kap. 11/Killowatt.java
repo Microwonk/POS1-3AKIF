@@ -12,5 +12,6 @@ public class Killowatt
         hour = s.nextDouble();
         erg= (cent*hour)/100;
         System.out.println("Jahreskosten: "+ erg);
+        s.close();
     }
 }

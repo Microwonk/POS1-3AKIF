@@ -25,5 +25,6 @@ public class Standardabweichung {
 
         System.out.println();
         System.out.println("Die Standartabweichung ist "+standartabweichung);
+        s.close();
     }
 }

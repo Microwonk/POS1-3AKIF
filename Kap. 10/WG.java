@@ -16,5 +16,6 @@ public class WG {
         n = rest/5;
         c = rest%5;
         System.out.println("Dollar: " +d+", Quarter: " +q+ ", Dime: " +di+ ", Nickel: " +n+", Cent: "+c );
+        s.close();
     }
 }

@@ -17,5 +17,6 @@ public class SummeN {
         }
         System.out.println();
         System.out.println("Die Summe ist: " +sum);
+        s.close();
     }
 }

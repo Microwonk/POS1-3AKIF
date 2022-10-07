@@ -15,5 +15,6 @@ public class StartEnd {
             System.out.println(start);
             start = start+1;
         }
+        s.close();
     }
 }

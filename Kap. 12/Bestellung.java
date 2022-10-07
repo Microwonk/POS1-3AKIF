@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 public class Bestellung {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -28,5 +26,6 @@ public class Bestellung {
         else{
             System.out.println("Gesamtbetrag: "+erg);
         }
+        scan.close();
     }
 }

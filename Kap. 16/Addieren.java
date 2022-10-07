@@ -16,8 +16,8 @@ public class Addieren {
             sum = sum+input;
             ++i;
         }
-        
         System.out.println();
         System.out.println("Die Summe ist "+sum);
+        s.close();
     }
 }

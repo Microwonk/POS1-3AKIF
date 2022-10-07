@@ -9,5 +9,6 @@ public class circle{
         double A;
         A = r*r*Math.PI;
         System.out.println("Flaeche: " +A);
+        s.close();
     }
 }

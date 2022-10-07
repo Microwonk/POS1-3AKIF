@@ -22,5 +22,6 @@ public class Twowords {
             i = i+1;
         }
         System.out.print(wort2);
+        s.close();
     }
 }

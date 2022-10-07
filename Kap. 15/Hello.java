@@ -18,5 +18,6 @@ public class Hello {
             System.out.println(eingabe);
             i = i+1;
         }
+        s.close();
     }
 }

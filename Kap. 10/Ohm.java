@@ -10,5 +10,6 @@ public class Ohm {
         r = s.nextDouble();
         i = u/r;
         System.out.println("Die Stromstaerke betraegt: " +i);
+        s.close();
     }
 }
