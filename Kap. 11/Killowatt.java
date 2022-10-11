@@ -10,7 +10,7 @@ public class Killowatt
         cent = s.nextDouble();
         System.out.println("Geben Sie die Anzahl der Kilowattstunden im Jahr ein");
         hour = s.nextDouble();
-        erg= (cent*hour)/100;
+        erg= (cent*hour)/100.0;
         System.out.println("Jahreskosten: "+ erg);
         s.close();
     }

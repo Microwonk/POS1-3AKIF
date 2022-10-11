@@ -5,9 +5,7 @@ public class Bestellung {
         Scanner scan = new Scanner(System.in);
         int schraubenmenge, mutternmenge, unterlegscheibenmenge, erg;
 
-        final int schrauben = 5;
-        final int muttern = 3;
-        final int unterlegscheiben = 1;
+        final int schrauben = 5, muttern = 3, unterlegscheiben = 1;
 
         System.out.println("Anzahl der Schrauben:");
         schraubenmenge = scan.nextInt();
@@ -19,13 +17,16 @@ public class Bestellung {
         erg = (schraubenmenge*schrauben)+(mutternmenge*muttern)+(unterlegscheibenmenge*unterlegscheiben);
         System.out.println();
 
-        if (schraubenmenge<mutternmenge) {
+        if (schraubenmenge!= mutternmenge) {
             System.out.println("Kontrollieren Sie ihre Bestellung!");
         }
 
         else{
-            System.out.println("Gesamtbetrag: "+erg);
+            System.out.println("Die Bestellung ist okay.");
         }
+
+        System.out.println("Gesamtbetrag: "+erg);
+
         scan.close();
-    
+    }
 }

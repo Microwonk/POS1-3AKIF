@@ -15,9 +15,8 @@ public class NonFett {
         System.out.println("Prozent mageres Fleisch Packung B:");
         proB = scan.nextDouble();
 
-        A = A+(A-A*(proA/100.0));
-        B = B+(B-B*(proB
-        /100.0));
+        A = (A/proA)*100;
+        B = (B/proB)*100;
 
         System.out.println("Packung A koster pro Pfund mageres Fleisch: " +A);
         System.out.println("Packung B koster pro Pfund mageres Fleisch: " +B);
@@ -25,14 +24,12 @@ public class NonFett {
         if (A>B) {
             System.out.println("Packung B ist preiswerter");
         }
-        else {
-            if (A==B) {
-                System.out.println("Es gibt keinen Unterschied");
-            }
-            else {
+        else if (A<B){
             System.out.println("Packung A ist preiswerter");
-            }
-            scan.close();
         }
+        else {
+            System.out.println("Es gibt keinen Unterschied");
+        }
+        scan.close();
     }
 }
