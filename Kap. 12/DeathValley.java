@@ -20,5 +20,6 @@ public class DeathValley {
         else {
             System.out.println("Weiterfahren...");
         }
+        scan.close();
     }
 }

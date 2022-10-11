@@ -9,5 +9,6 @@ public class Money {
         d = m/100;
         c = m%100;
         System.out.println("Das ergibt " +d+ " Dollar und " +c+ " Cent.");
+        s.close();
     }
 }

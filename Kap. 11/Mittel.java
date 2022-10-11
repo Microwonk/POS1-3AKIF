@@ -17,5 +17,6 @@ public class Mittel
         
         System.out.println("Arithmetisches Mittel: " + A);
         System.out.println("Harmonisches Mittel: " + H);
+        scan.close();
     }
 }

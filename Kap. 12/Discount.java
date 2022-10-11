@@ -19,5 +19,6 @@ public class Discount
             preis = eingabe;
             System.out.println("Ihr Gesamtpreis beträgt: " + preis);
         }
+        s.close();
     }
 }

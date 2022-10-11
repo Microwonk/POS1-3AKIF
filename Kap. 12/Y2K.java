@@ -25,5 +25,6 @@ public class Y2K {
          else {
             System.out.println("Bitte Jahreszahlen ziwschen 00-99 eingeben."); //else fall, der nicht sinnvolle eingaben ausschließt
          }
+         s.close();
     }
 }

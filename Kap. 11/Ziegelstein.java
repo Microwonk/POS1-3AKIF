@@ -12,5 +12,6 @@ public class Ziegelstein
         ergebnis = (1/2.0)*9.81*sekunden*sekunden;
 
         System.out.println("Die Entfernung e beträgt: "+ergebnis+ " Meter");
+        scan.close();
     }
 }

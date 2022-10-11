@@ -22,5 +22,6 @@ public class Lueftungsanlage {
         else {
             System.out.println("Bitte geben Sie realistische Werte ein!");
         }
+        s.close();
     }
 }

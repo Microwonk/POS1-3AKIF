@@ -12,5 +12,6 @@ public class Logarithmus
         calc= Math.log(input)/Math.log(2);
 
         System.out.println("Der Zweierlogartihmus von "+input+" ist: " + calc);
+        scan.close();
     }
 }

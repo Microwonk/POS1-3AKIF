@@ -32,6 +32,7 @@ public class NonFett {
             else {
             System.out.println("Packung A ist preiswerter");
             }
+            scan.close();
         }
     }
 }
