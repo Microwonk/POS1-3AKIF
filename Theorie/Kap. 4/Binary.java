@@ -21,7 +21,7 @@ public class Binary {
             binary = scan.next();
             stellen = binary.length();
 
-            if (binary.contains("1")&&binary.contains("0")) {
+            if (binary.contains("1")||binary.contains("0")) {
 
                 while (stellen > 0) {
 
