@@ -25,7 +25,7 @@ public class Binary {
 
                 while (stellen > 0) {
 
-                    if (Character.getNumericValue(binary.charAt(stelle)) != 0) { 
+                    if (Character.getNumericValue(binary.charAt(stelle)) == 1) { 
                         
                         dezi = dezi + (int) Math.pow(2, stellen-1);
                     }
