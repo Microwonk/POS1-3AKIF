@@ -5,7 +5,7 @@ public class Binary {
 
         Scanner scan = new Scanner(System.in);
 
-        int stelle, stellen, i;
+        int stelle, stellen;
         long dezi;
         String binary;
 
