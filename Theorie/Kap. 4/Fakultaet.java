@@ -27,6 +27,5 @@ public class Fakultaet {
         System.out.println("Ihre Fakultaet ist: " + fak);
 
         scan.close();
-        return;
     }
 }

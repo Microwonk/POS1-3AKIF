@@ -4,16 +4,16 @@ public class Rabattberechnung {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        int KN, JU, i;
+        int JU, i;
         double rabatt;
-        String berechnung;
+        String berechnung, KN;
 
         System.out.println("Rabattberechnung");
 
         do {
             System.out.println();
             System.out.print("Kundennummer: ");
-            KN = scan.nextInt();
+            KN = scan.nextLine();
             
             System.out.print("Jahresumsatz: ");
             JU = scan.nextInt();
