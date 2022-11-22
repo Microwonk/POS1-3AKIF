@@ -17,6 +17,8 @@ public class App {
         System.out.println("memeMethod:");
         s.memeMethod(4);
 
-        SecondObject.codeGuess(8);
+        SecondObject.codeGuess(7);
+
+        System.out.println(ThirdObject.Zahl(2, 5));
     }
 }

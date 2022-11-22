@@ -28,4 +28,16 @@ public class FirstObject {
         
         return nameinput;
     }
+
+    
+    static void wertbooelan () {
+        boolean wert = true;
+
+        while (true) {
+            
+            if (!wert) {
+                break;
+            }
+        }
+    }
 }
