@@ -1,5 +1,5 @@
 
-public class App {
+public class Main {
     public static void main(String[] args) throws Exception {
 
         System.out.println("Hello, World!");
@@ -19,6 +19,6 @@ public class App {
 
         SecondObject.codeGuess(7);
 
-        System.out.println(ThirdObject.Zahl(2, 5));
+        System.out.println(ThirdObject.Zahl(5, 5));
     }
 }
