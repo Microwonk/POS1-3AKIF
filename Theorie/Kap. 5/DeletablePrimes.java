@@ -4,6 +4,8 @@ public class DeletablePrimes {
    public static void main(String[] args) {
       BigInteger prime = new BigInteger("4567");
 
+      System.out.println(isPrime(prime));
+      deletablePrimeNums(prime);
    }
 
    /**   
@@ -23,15 +25,28 @@ public class DeletablePrimes {
 
    static int counter = 0;
 
-   static int deletablePrimeNums (BigInteger prime) {
-      String primeString = prime;
-      if (isPrime(prime)) {
-         if (primeString.length() == 1) {
-            return 1;
+   static void deletablePrimeNums (BigInteger prime) {
+      int j = 0;
+      String primeInt = prime.toString();
+
+      while (primeInt.length()-1 >= j) {
+
+         StringBuilder sb = new StringBuilder(primeInt);
+         sb.deleteCharAt(j);
+         primeInt = sb.toString();
+
+         int temp = Integer.parseInt(primeInt);
+
+         if (isPrime(BigInteger.valueOf(temp))) {
+            deletablePrimeNums(BigInteger.valueOf(temp));
          }
          else {
-            deletablePrimeNums(primeString);
+            return;
          }
+         j++;
+      }
+      if (primeInt.length() == 1){
+         System.out.println("+1");
       }
    }
 }

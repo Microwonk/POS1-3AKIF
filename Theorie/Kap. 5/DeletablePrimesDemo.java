@@ -1,56 +1,77 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
-public class DeletablePrimesDemo.java {
+public class DeletablePrimesDemo {
 
-    static boolean checkprime(int n)
-    {
-        // If n is 1
-        if (n == 1) {
+    private static int ways = 0;
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Number: ");
+        long n = scanner.nextLong();
+        scanner.close();
+        reduceNumber(n);
+        System.out.println("Ways: " + ways);
+    }
+
+    private static void reduceNumber(long nr ) {
+        ArrayList<Integer> arr = longToArray(nr);
+        if (!isPrime(nr)) {
+            return;
+        } else if (arr.size() == 1) {
+            ways++;
+            return;
+        }
+        for (int i = 0; i < arr.size(); i++) {
+            ArrayList<Integer> arr2 = new ArrayList<Integer>(arr);
+            arr2.remove(i);
+            reduceNumber(arrayToLong(arr2));
+        }
+    }
+
+
+    private static long arrayToLong(ArrayList<Integer> arr) {
+        long suma = 0;
+        for (int i = arr.size() - 1; i >= 0; i--) {
+            suma += arr.get(i) * Math.pow(10, arr.size() - i - 1);
+        }
+        return suma;
+    }
+
+    private static ArrayList<Integer> longToArray(long nr) {
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        long x = nr;
+        int i = 0;
+        int nrC = 0;
+        while (x != 0) {
+            long c = x % 10;
+            nrC++;
+            arr.add((int) c);
+            i++;
+            x = x / 10;
+        }
+        ArrayList<Integer> arr2 = new ArrayList<Integer>();
+        int j = 0;
+        for (i = nrC - 1; i >= 0; i--) {
+            arr2.add(arr.get(i));
+            j++;
+        }
+        return arr2;
+    }
+
+    public static boolean isPrime(long number) {
+        if (number == 1 || number == 0) {
             return false;
         }
- 
-        // If n is 2 or 3
-        if (n == 2 || n == 3) {
-            return true;
-        }
- 
-        // If n is multiple of 2, 3 or 6
-        else if (n % 2 == 0 || n % 3 == 0
-                 || n % 6 == 0) {
-            return false;
-        }
- 
-        // Traversing till sqrt(n)
-        for (int i = 6; i * i <= n; i += 6) {
-            if (n % (i - 1) == 0
-                || n % (i + 1) == 0) {
-                return false;
+        long sq = (long) Math.sqrt(number);
+        for (long i = 2; i <= sq; i++) {
+            if (number % i == 0) {
+                return false; //number is divisible so its not prime
             }
         }
-        return true;
+        return true;  //number is prime now
     }
 
-    static HashSet<Integer> Primes
-        = new HashSet<>();
-
-    public static int test(String number, ) {
-        if (!isPrime(number.filterIndexed { i, c -> i !in excluded }.toLong())) return 0
-        if (excluded.size == number.length) return 0
-        if (excluded.size == number.length - 1) return 1
-        var sum = 0
-        for (i in 0 until number.length) {
-            if (i !in excluded) {
-                excluded.add(i)
-                sum += test(number, excluded)
-                excluded.remove(i)
-            }
-        }
-        return sum;
-    }
-
-    fun main() = level { input ->
-        val number = input.next()
-        val excluded = HashSet<Int>()
-        val result = test(number, excluded)
-        output(result)
-    }
 }
