@@ -16,7 +16,7 @@ public class Binary {
         System.out.println("---------Binärrechner---------");
         
         System.out.print("Geben Sie eine Binäre Zahl ein: ");
-        binary = scan.next();
+        binary = scan.nextLine();
         stellen = binary.length();
 
         while (stellen > 0) {

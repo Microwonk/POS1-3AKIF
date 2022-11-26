@@ -29,7 +29,7 @@ public class fakultaetfunktion {
 
     public static int fakint (int x) {
         if (x != 0) {
-            return x * fakint(x-1);
+            return x * fakint(x - 1);
         }
         else {
             return 1;
