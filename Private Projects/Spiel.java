@@ -8,54 +8,51 @@ public class Spiel {
         int i = 1;
         boolean goldcollect = false;
 
-        int xplayer = random.nextInt(0, 40);
-        int xsnake = random.nextInt(0, 40);
-        int xgold = random.nextInt(0, 40);
-        int xexit = random.nextInt(0, 40);
+        int xplayer = random.nextInt(0, 41);
+        int xsnake = random.nextInt(0, 41);
+        int xgold = random.nextInt(0, 41);
+        int xexit = random.nextInt(0, 41);
         
-        int yplayer = random.nextInt(0, 10);
-        int ysnake = random.nextInt(0, 10);
-        int ygold = random.nextInt(0, 10);
-        int yexit = random.nextInt(0, 10);
+        int yplayer = random.nextInt(0, 11);
+        int ysnake = random.nextInt(0, 11);
+        int ygold = random.nextInt(0, 11);
+        int yexit = random.nextInt(0, 11);
 
-        while ((xplayer == xsnake)&&(xplayer == xgold)&&(xplayer == xexit)&&(xsnake == xgold)&&(xsnake == xexit)&&(xgold == xexit)) {
+        while ((xplayer == xsnake)&&(xplayer == xgold)&&(xplayer == xexit)&&(xsnake == xgold)&&(xsnake == xexit)&&(xgold == xexit)&&(yplayer == ysnake)&&(yplayer == ygold)&&(yplayer == yexit)&&(ysnake == ygold)&&(ysnake == yexit)&&(ygold == yexit)) {
             if (xplayer == xsnake) {
                 xplayer = random.nextInt(0, 40);
             }
-            else if (xplayer == xgold) {
+            if (xplayer == xgold) {
                 xplayer = random.nextInt(0, 40);
             }
-            else if (xplayer == xexit) {
+            if (xplayer == xexit) {
                 xplayer = random.nextInt(0, 40);
             }
-            else if (xsnake == xgold) {
+            if (xsnake == xgold) {
                 xsnake = random.nextInt(0, 40);
             }
-            else if (xsnake == xexit) {
+            if (xsnake == xexit) {
                 xsnake = random.nextInt(0, 40);
             }
-            else if (xgold == xexit) {
+            if (xgold == xexit) {
                 xgold = random.nextInt(0, 40);
             }
-        }
-        
-        while ((yplayer == ysnake)&&(yplayer == ygold)&&(yplayer == yexit)&&(ysnake == ygold)&&(ysnake == yexit)&&(ygold == yexit)) {
             if (yplayer == ysnake) {
                 yplayer = random.nextInt(0, 10);
             }
-            else if (yplayer == ygold) {
+            if (yplayer == ygold) {
                 yplayer = random.nextInt(0, 10);
             }
-            else if (yplayer == yexit) {
+            if (yplayer == yexit) {
                 yplayer = random.nextInt(0, 10);
             }
-            else if (ysnake == ygold) {
+            if (ysnake == ygold) {
                 ysnake = random.nextInt(0, 10);
             }
-            else if (ysnake == yexit) {
+            if (ysnake == yexit) {
                 ysnake = random.nextInt(0, 10);
             }
-            else if (ygold == yexit) {
+            if (ygold == yexit) {
                 ygold = random.nextInt(0, 10);
             }
         }
@@ -67,37 +64,39 @@ public class Spiel {
         
         //10x40
         while (i == 1) {
-            
-            
             for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 40 ; x++) {
-                Point p = new Point(x,y);
-                System.out.print(" ");
-                
-                if (p.equals(playerposition)) {
-                    System.out.print("P");
+                for (int x = 0; x < 40 ; x++) {
+                    Point p = new Point(x,y);
+                    if (!(playerposition.x == x)||(snakeposition.x == x)||(exitposition.x == x)||(goldposition.x == x)) {
+                        System.out.print(".");
+                    }
+
+                    if (p.equals(playerposition)) {
+                        System.out.print("P");
+                    }
+                    
+                    else if (p.equals(snakeposition)){
+                        System.out.print("S");
+                    }
+                    
+                    else if (p.equals(exitposition)) {
+                        System.out.print("E");
+                    }
+                    
+                    else if (p.equals(goldposition)) {
+                        System.out.print("G");
+                    }
+                    
                 }
-                
-                else if (p.equals(snakeposition)){
-                    System.out.print("S");
-                }
-                
-                else if (p.equals(exitposition)) {
-                    System.out.print("E");
-                }
-                
-                else if (p.equals(goldposition)) {
-                    System.out.print("G");
-                }
-                
+                System.out.println();
             }
-            System.out.println();
-        }
 
         if (snakeposition.equals(playerposition)) {
             i = 0;
             System.out.println();
+            System.out.println("_______________________________________");
             System.out.println("Du Hast VERLOREN");
+            return;
         }
         if (playerposition.equals(goldposition)) {
             goldcollect = true;
@@ -107,6 +106,8 @@ public class Spiel {
             i = 0;
             System.out.println();
             System.out.println("Du Hast GEWONNEN >:)");
+            System.out.println("_______________________________________");
+            return;
         }
         System.out.println("_______________________________________");
         System.out.print("MOVE: ");

@@ -9,6 +9,7 @@ public class Hanoi {
         double before = System.currentTimeMillis();
 
         Hanoi h = new Hanoi();
+        
         h.transport(n, 'L', 'M', 'R');
 
         double after = System.currentTimeMillis();
