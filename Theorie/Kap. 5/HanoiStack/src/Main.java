@@ -1,9 +1,12 @@
+import java.util.Scanner;
+
 public class Main {
 
     private int scheibenAnzahl;
     private Saeule links;
     private Saeule mitte;
     private Saeule rechts;
+    private int counter;
 
 
     /**
@@ -13,9 +16,10 @@ public class Main {
 
     public Main(int scheibenAnzahl) {
         this.scheibenAnzahl = scheibenAnzahl;
-        links = new Saeule("L");
-        mitte = new Saeule("M");
-        rechts = new Saeule("R");
+        this.links = new Saeule("L");
+        this.mitte = new Saeule("M");
+        this.rechts = new Saeule("R");
+        this.counter = 0;
 
         // Initialisierung der linken Säule mit x Scheiben
         for (int i = scheibenAnzahl; i > 0; i--) {
@@ -30,9 +34,9 @@ public class Main {
         anzeigen();
 
         transport(scheibenAnzahl, links, mitte, rechts);
+        System.out.println("Runden: " + counter);
     }
 
-    private int counter = 0;
 
     /**
      * Methode/Algorithmus zum Lösen von Türme von Hanoi
@@ -49,7 +53,6 @@ public class Main {
         transportiereScheibe(l, m);
         anzeigen();
         counter++;
-        System.out.println("Runden: " + counter);
 
         if (n > 1) {
             transport(n - 1, r, m, l);
@@ -83,8 +86,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Wie viele Scheiben?");
+        int anzahl = s.nextInt();
+        s.close();
 
-        Main spiel = new Main(3);
+        Main spiel = new Main(anzahl);
         spiel.starte();
 
     }
