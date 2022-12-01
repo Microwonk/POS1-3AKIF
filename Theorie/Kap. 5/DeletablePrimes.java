@@ -2,31 +2,75 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 public class DeletablePrimes {
-   public static void main(String[] args) {
-      Scanner scan = new Scanner(System.in);
-      String prime;
-
-      System.out.println("Geben Sie eine Primzahl ein: ");
-      prime = scan.nextLine();
-      scan.close();
-
-      deletablePrimeNums(prime);
-      System.out.println("Ways: " + ways);
+   
+   private static int ways;
+   
+   public DeletablePrimes() {
+      //sets the number of ways to zero
+      ways = 0;
    }
 
-   //sets the number of ways to zero
-   private static int ways = 0;
+   /**
+    * starting method
+    */
 
+   private static void start() {
+      Scanner scan = new Scanner(System.in);
+      String prime = "0";
+
+
+      //loop for initial Prime
+      while (!isPrime(prime)) {
+         System.out.println("A Prime number: ");
+         prime = scan.nextLine();
+         if (!isPrime(prime)) {
+            System.out.println("Not a Prime!!");
+         }
+      }
+      scan.close();
+      
+      //controls, whether the prime given is single digit or not
+      if (prime.length() == 1) {
+         System.out.println("Prime of one digit, cannot be deletable!");
+      } else {
+         deletablePrimeWays(prime);
+         System.out.println("Ways: " + ways);
+      }
+      return;
+   }
+
+      /**
+    * removes a certain character of the index from String primeNumber
+    * @param primenumber
+    * @param index
+    * @return the new String, which has the charAt index removed
+    */
+
+    private static String removeByIndex(String primeNumber, int index) {
+      return new StringBuilder(primeNumber).deleteCharAt(index).toString();
+   }
+   
+   /**   
+    * checks if a number is prime or not, from input of String (With Biginteger.isProbablePrime)
+    * @param checkPrime
+    * @return
+    */
+
+   private static boolean isPrime (String checkforPrime) {
+      BigInteger checkedPrime = new BigInteger(checkforPrime);
+      return checkedPrime.isProbablePrime(1);
+   }
+   
 
    /**
-    * rekursive Funktion für die errechnung von den Wegen
+    * recursive Function to calculate the ways a Prime can be deletable to a single digit Prime number
     * @param prime
     */
-   
-   private static void deletablePrimeNums (String prime) {
+    
+   private static void deletablePrimeWays (String prime) {
       int i = 0;
-
-      //solang i kleiner als die Länge der Zahl ist
+      
+      //as long as i is smaller than the length of the Prime
       while (i < prime.length()) {
          //checks, if the number is prime or not
          if (isPrime(prime)) {
@@ -41,33 +85,19 @@ public class DeletablePrimes {
                String temp = removeByIndex(prime, i);
 
                if (isPrime(temp)) {
-                  //rekursiver Aufruf von deletablePrimeNums mit dem neuen String temp
-                  deletablePrimeNums(temp);
+                  //recursive call of deletablePrimeWays
+                  deletablePrimeWays(temp);
                }
             }
          }
          i++;
       }
-   }
-   /**
-    * removes a certain character of the index from String str
-    * @param str
-    * @param index
-    * @return the new String, which has the charAt index removed
-    */
-
-   private static String removeByIndex(String str, int index) {
-      return new StringBuilder(str).deleteCharAt(index).toString();
+      return;
    }
    
-   /**   
-    * checks if a number is prime or not, from input of String (With Biginteger.isProbablePrime)
-    * @param checkPrime the Number being checked for being a prime
-    * @return true if a prime, false if not a prime
-    */
-
-   private static boolean isPrime (String checkPrime) {
-      BigInteger prime = new BigInteger(checkPrime);
-      return prime.isProbablePrime(1);
+   //main
+   public static void main(String[] args) {
+      start();
+      return;
    }
 }

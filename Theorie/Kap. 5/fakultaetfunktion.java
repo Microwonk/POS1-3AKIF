@@ -34,7 +34,6 @@ public class fakultaetfunktion {
         else {
             return 1;
         }
-    }
     
     public static int faklong (int z) {
         if (z != 0) {
