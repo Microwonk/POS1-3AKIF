@@ -39,8 +39,11 @@ public class DeletablePrimes {
             else {
                //sets new String of temp
                String temp = removeByIndex(prime, i);
-               //rekursiver Aufruf von deletablePrimeNums mit dem neuen String temp
-               deletablePrimeNums(temp);
+
+               if (isPrime(temp)) {
+                  //rekursiver Aufruf von deletablePrimeNums mit dem neuen String temp
+                  deletablePrimeNums(temp);
+               }
             }
          }
          i++;
