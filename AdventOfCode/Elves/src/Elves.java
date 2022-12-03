@@ -3,22 +3,22 @@ import java.util.Arrays;
 public class Elves {
     
     public static int[] getEachCalories () {
-        int lengthOfArray =         0;
-        int arrayOfCaloriesCount =      0;
+        int lengthOfArray = 0;
+        int arrayOfCaloriesCount = 0;
 
-        for (int j =        0; j < everyElfCalories.length; j++) {
-            if (everyElfCalories[j] ==      0) {
+        for (int j = 0; j < everyElfCalories.length; j++) {
+            if (everyElfCalories[j] == 0) {
                 lengthOfArray++;
             }
         }
         int arrayOfCalories[] = new int[lengthOfArray];
 
-        int tempsum =       0;
+        int tempsum = 0;
 
-        for (int i =        0; i < everyElfCalories.length; i++) {
-            if (everyElfCalories[i] ==      0) {
+        for (int i =  0; i < everyElfCalories.length; i++) {
+            if (everyElfCalories[i] == 0) {
                 arrayOfCalories[arrayOfCaloriesCount] = tempsum;
-                tempsum =       0;
+                tempsum = 0;
                 arrayOfCaloriesCount++;
                 System.out.println(Arrays.toString(arrayOfCalories));
             }
