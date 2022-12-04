@@ -14,7 +14,7 @@ public class Main {
 
         System.out.println();
         System.out.println(maxNum +" " + maxNum1 +" " + maxNum2);
-        System.out.println("Maxnummer von den höchsten 3: " + maxNum + maxNum1 + maxNum2);
+        System.out.println("Maxnummer von den höchsten 3: " + (maxNum + maxNum1 + maxNum2));
     }
 
     public static void main(String[] args) throws Exception {
