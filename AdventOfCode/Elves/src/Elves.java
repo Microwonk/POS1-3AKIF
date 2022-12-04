@@ -15,7 +15,7 @@ public class Elves {
 
         int tempsum = 0;
 
-        for (int i = 0; i < everyElfCalories.length; i++) {
+        for (int i =  0; i < everyElfCalories.length; i++) {
             if (everyElfCalories[i] == 0) {
                 arrayOfCalories[arrayOfCaloriesCount] = tempsum;
                 tempsum = 0;
