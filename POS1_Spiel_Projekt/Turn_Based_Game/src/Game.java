@@ -5,61 +5,72 @@ import java.awt.Desktop;
 
 public class Game {
 
+    // initialisieren der stat vars
+    public static int strength, stamina, health, chosenFighter;
+    public static String specialMove1, specialMove2, name;
+
     private static int i = 0;
+
+    //game over Screen when dying
     private static String gameOverScreen = "=-==-={[G A M E O V E R]}=-==-=";
-    
+
+    /**
+     * starts the game (starting screen)
+     */
     public static void start() {
 
         Scanner scan = new Scanner(System.in);
 
-            System.out.println("Press ENTER to continue.");
+            System.out.println("<Press ENTER to continue>");
             String in = scan.nextLine();
     
         //equalsIgnoreCase
 
         if(in.equals("")) {
             if (i < 0) {
-                System.out.println("Finally, you got it.");
+                System.out.println("<Finally, you got it>");
             }
             Selection();
             scan.close();
             return;
         }
 
+        // in case enter is not pressed (a bit of fun)
+
         switch (i) {
             case 0:
-                System.out.println("No, don't type anything, please press ENTER.");
+                System.out.println("<No, don't type anything, please press ENTER>");
                 i++;
                 start();
                 break;
             case 1:
-                System.out.println("E N T E R");
+                System.out.println("<E N T E R>");
                 i++;
                 start();
                 break;
             case 2:
-                System.out.println("No seriously, what is wrong with you, please press E N T E R");
+                System.out.println("<No seriously, what is wrong with you, please press E N T E R>");
                 i++;
                 start();
                 break;
             case 3:
-                System.out.println("NOW SERIOUSLY, CAN YOU NOT JUST PRESS ENTER?");
+                System.out.println("<NOW SERIOUSLY, CAN YOU NOT JUST PRESS ENTER>");
                 i++;
                 start();
                 break;
             case 4:
-                System.out.println("I AM LOSING MY PATIENCE.");
+                System.out.println("<I AM LOSING MY PATIENCE>");
                 i++;
                 start();
                 break;
             case 5:
-                System.out.println("THIS IS THE LAST WARNING.");
+                System.out.println("<THIS IS THE LAST WARNING>");
                 i++;
                 start();
                 break;
 
             default:
-                System.out.println("Okay, you didn't want it any other way.");
+                System.out.println("<Okay, you didn't want it any other way>");
                 System.out.println(gameOverScreen);
                 scan.close();
                 return;
@@ -67,13 +78,16 @@ public class Game {
         scan.close();
     }
 
+
+    /**
+     * starts the Selection of Character
+     */
     public static void Selection() {
         Scanner scan = new Scanner(System.in);
         boolean decided = false;
-        int chosenFighter;
         Desktop d = Desktop.getDesktop();
 
-        System.out.println("Opening character selection, please view.");
+        System.out.println("<Opening character selection, please view>");
         
         // opening the stat preview of all characters
 
@@ -96,11 +110,11 @@ public class Game {
                 decided = true;
             }
             else {
-                System.out.println("That is not a character, try again.");
+                System.out.println("<That is not a character, try again>");
             }
         } while (!decided);
 
-        System.out.println("Now opening preview of your Character.");
+        System.out.println("<Now opening preview of your Character>");
 
         // opening the preview of the chosen character
 
@@ -113,10 +127,41 @@ public class Game {
             e.printStackTrace();
         }
 
-        end();
+        System.out.print("Now give your Pokemon a name:");
+        name = scan.next();
+        System.out.println();
+
+
+
+        switch (chosenFighter) {
+            case 1:
+                strength = 10;
+                stamina = 70;
+                health = 40;
+                specialMove1 = "Earthquake";
+                specialMove2 = "Boulder";
+                break;
+            case 2:
+                strength = 20;
+                stamina = 60;
+                health = 20;
+                specialMove1 = "Thunder";
+                specialMove2 = "Heal";
+                break;
+            default:
+                strength = 5;
+                stamina = 100;
+                health = 70;
+                specialMove1 = "Sleep";
+                specialMove2 = "Hypnosis";
+                break;
+
+        }
+
+        Player player = new Player(chosenFighter, strength, stamina, health, specialMove1, specialMove2, name);
+        Menu.showMenu();
     }
 
-    public static void end() {
-        
-    }
+
+
 }
