@@ -1,27 +1,59 @@
-
+import java.lang.Thread;
 public class Player {
 
-    static int type, strength, stamina, health;
+    int level = 1;
+    static int type, strength, stamina, health, levelxp;
     static String specialMove1, specialMove2, name;
-    public Player(int type, int strength, int stamina, int health, String specialMove1, String specialMove2, String name) {
+    public Player(int type, int strength, int stamina, int health, String specialMove1, String name) {
         Player.type = type;
         Player.strength = strength;
         Player.stamina = stamina;
         Player.health = health;
         Player.specialMove1 = specialMove1;
-        Player.specialMove2 = specialMove2;
         Player.name = name;
         return;
     }
 
     public void getStats () {
-        System.out.println("Your name: " + name);
+        System.out.println("----==-< " + name + "'s Stats >-==----");
         System.out.println("Type: " + type);
         System.out.println("Strength: " + strength);
         System.out.println("Stamina: " + stamina);
         System.out.println("Health: " + health);
-        System.out.println("Special Moves: " + specialMove1 + ", " + specialMove2);
+        System.out.println("Special Move: " + specialMove1);
+        System.out.println("Level: " + level + " (" + (levelxp) + "/100 until next Level)");
+        
+        try {
+            Thread.sleep(2000);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
         return;
+    }
+
+    public void levelUp (int xp) {
+        levelxp = levelxp + xp;
+        // 100 is the threshhold for reaching the next level
+        if (levelxp >= 100) {
+            this.level++;
+
+            levelxp = levelxp%100;
+        }
+    }
+
+    public final int SPECIALMOVESTRENGTH = Player.strength * 2;
+
+    public void upgradeStrength () {
+        Player.strength++;
+    }
+
+    public void upgradeHealth () {
+        Player.health+=2;
+    }
+
+    public void upgradeStamina () {
+        Player.stamina+=5;
     }
 
 }

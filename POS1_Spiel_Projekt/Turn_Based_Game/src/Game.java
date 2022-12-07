@@ -7,7 +7,7 @@ public class Game {
 
     // initialisieren der stat vars
     public static int strength, stamina, health, chosenFighter;
-    public static String specialMove1, specialMove2, name;
+    public static String specialMove, specialMove2, name;
 
     private static int i = 0;
 
@@ -138,27 +138,25 @@ public class Game {
                 strength = 10;
                 stamina = 70;
                 health = 40;
-                specialMove1 = "Earthquake";
-                specialMove2 = "Boulder";
+                specialMove = "Earthquake";
                 break;
             case 2:
                 strength = 20;
                 stamina = 60;
                 health = 20;
-                specialMove1 = "Thunder";
-                specialMove2 = "Heal";
+                specialMove = "Thunder";
                 break;
             default:
                 strength = 5;
                 stamina = 100;
                 health = 70;
-                specialMove1 = "Sleep";
-                specialMove2 = "Hypnosis";
+                specialMove = "Roll";
                 break;
 
         }
 
-        Player player = new Player(chosenFighter, strength, stamina, health, specialMove1, specialMove2, name);
+        //Player player = new Player(chosenFighter, strength, stamina, health, specialMove, name);
+        Menu.intro();
         Menu.showMenu();
     }
 
