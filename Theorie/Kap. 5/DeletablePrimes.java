@@ -20,19 +20,21 @@ public class DeletablePrimes {
 
 
       //loop for initial Prime
-      while (!isPrime(prime)) {
+      while (true) {
          System.out.println("A Prime number: ");
          prime = scan.nextLine();
          if (!isPrime(prime)) {
             System.out.println("Not a Prime!!");
          }
+         else break;
       }
       scan.close();
       
       //controls, whether the prime given is single digit or not
       if (prime.length() == 1) {
          System.out.println("Prime of one digit, cannot be deletable!");
-      } else {
+      } 
+      else {
          deletablePrimeWays(prime);
          System.out.println("Ways: " + ways);
       }
@@ -69,25 +71,22 @@ public class DeletablePrimes {
     
    private static void deletablePrimeWays (String prime) {
       int i = 0;
+      String temp;
       
       //as long as i is smaller than the length of the Prime
       while (i < prime.length()) {
-         //checks, if the number is prime or not
-         if (isPrime(prime)) {
+      
+         if (prime.length() == 1) {
+            //counts the ways if the length is 1
+            ways++;
+         }
+         else {
+            //sets new String of temp
+            temp = removeByIndex(prime, i);
 
-            if (prime.length() == 1) {
-               //counts the ways if the length is 1
-               ways++;
-            }
-
-            else {
-               //sets new String of temp
-               String temp = removeByIndex(prime, i);
-
-               if (isPrime(temp)) {
-                  //recursive call of deletablePrimeWays
-                  deletablePrimeWays(temp);
-               }
+            if (isPrime(temp)) {
+               //recursive call of deletablePrimeWays
+               deletablePrimeWays(temp);
             }
          }
          i++;
