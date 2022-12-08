@@ -2,16 +2,16 @@ import java.lang.Thread;
 public class Player {
 
     int level = 1;
-    static int type, strength, stamina, health, levelxp;
-    static String specialMove1, specialMove2, name;
+    static int type, strength, health, levelxp, specialMoveStrength;
+    static String specialMove, name;
 
-    public Player(int type, int strength, int stamina, int health, String specialMove1, String name) {
+    public Player(int type, int strength, int health, String specialMove, String name, int specialMoveStrength) {
         Player.type = type;
         Player.strength = strength;
-        Player.stamina = stamina;
         Player.health = health;
-        Player.specialMove1 = specialMove1;
+        Player.specialMove = specialMove;
         Player.name = name;
+        Player.specialMoveStrength = specialMoveStrength;
         return;
     }
 
@@ -19,9 +19,8 @@ public class Player {
         System.out.println("----==-< " + name + "'s Stats >-==----");
         System.out.println("Type: " + type);
         System.out.println("Strength: " + strength);
-        System.out.println("Stamina: " + stamina);
         System.out.println("Health: " + health);
-        System.out.println("Special Move: " + specialMove1);
+        System.out.println("Special Move: " + specialMove);
         System.out.println("Level: " + level + " (" + (levelxp) + "/100 until next Level)");
         
         try {
@@ -44,26 +43,27 @@ public class Player {
         return;
     }
 
-    public final int SPECIALMOVESTRENGTH = Player.strength * 2;
-
+    // Upgrades Strength by one
     public void upgradeStrength () {
         Player.strength++;
         return;
     }
 
+    // Upgrades Health by two
     public void upgradeHealth () {
         Player.health+=2;
         return;
     }
 
-    public void upgradeStamina () {
-        Player.stamina+=5;
-        return;
-    }
-
+    // changes name
     public void changeName (String newName) {
         Player.name = newName;
         return;
+    }
+
+    // Upgrades special ability
+    public void upgradeSpecialMoveStrength () {
+        Player.specialMoveStrength += 5;
     }
 
 }

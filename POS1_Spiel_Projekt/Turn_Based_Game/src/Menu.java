@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Menu {
     
-    static Player player = new Player(Game.chosenFighter, Game.strength, Game.stamina, Game.health, Game.specialMove, Game.name);
+    static Player player = new Player(Game.chosenFighter, Game.strength, Game.health, Game.specialMove, Game.name, Game.strength * 2);
     
     public Menu () {
 
@@ -90,10 +90,9 @@ public class Menu {
         System.out.println("------------------------------------");
         System.out.println("-- (1) Upgrade strength by one -----");
         System.out.println("-- (2) Upgrade health by two -------");
-        System.out.println("-- (3) Upgrade stamina by five -----");
-        System.out.println("-- (4) Upgrade " + Game.specialMove);
-        System.out.println("-- (5) Change name -----------------");
-        System.out.println("-- (6) Nevermind -------------------");
+        System.out.println("-- (3) Upgrade " + Game.specialMove);
+        System.out.println("-- (4) Change name -----------------");
+        System.out.println("-- (5) Nevermind -------------------");
         System.out.println("------------------------------------");
         System.out.println("---------- Points: " + levelpoints + "------------------");
         System.out.println("====================================");
@@ -103,7 +102,7 @@ public class Menu {
         while (true) {
             System.out.print(": ");
             levelingInput = Integer.parseInt(scan.next());
-            if (levelingInput == 1 || levelingInput == 2 || levelingInput == 3 || levelingInput == 4 || levelingInput == 5 || levelingInput == 6 || levelingInput == 7) {
+            if (levelingInput == 1 || levelingInput == 2 || levelingInput == 3 || levelingInput == 4 || levelingInput == 5) {
                 break;
             }
             else {
@@ -132,21 +131,25 @@ public class Menu {
                 case 3:
                     pointsSpent++;
 
-                    player.upgradeStamina();
-                    System.out.println("<Leveled Stamina by five>");
+                    player.upgradeSpecialMoveStrength();
+                    System.out.println("<Upgraded " + Game.specialMove +">");
+
                     leveling();
                     break;
                 case 4:
-                    System.out.println("Will fight random Enemy");
-                    leveling();
-                    break;
+                    pointsSpent++;
+                    System.out.println("Your Pokemons new Name: ");
+                    String newName = scan.next();
+
+                    player.changeName(newName);
                 default:
                     return;
             }
         }
-        else if (levelingInput != 6) {
+        else if (levelingInput != 5) {
             System.out.println("<Not enough Points>");
             return;
         }
+        return;
     }
 }

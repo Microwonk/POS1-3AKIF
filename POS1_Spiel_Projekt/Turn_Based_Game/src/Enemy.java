@@ -2,11 +2,10 @@ import java.util.*;
 import java.lang.Thread;
 
 public class Enemy {
-
+    
     private static int playerHealth = Player.health;
-    private static int playerStamina = Player.stamina;
-
-    private int strength, stamina, health;
+    
+    private int strength, health;
     private String name;
     private static Random r = new Random();
     
@@ -14,23 +13,22 @@ public class Enemy {
     public Enemy (int level) {
         if (level < 4) {
             this.strength = r.nextInt(1 * level, 10 * level );
-            this.stamina = r.nextInt(40 * level / 2, 81 * level);
             this.health = r.nextInt(10 * level, 31 * level);
         }
         else {
             this.strength = r.nextInt(10, 61);
-            this.stamina = r.nextInt(50, 300);
             this.health = r.nextInt(20, 100);
         }
         this.name = nameArray[r.nextInt(0, nameArray.length - 1)];
         return;
     }
+    public int enemyMaxHealth = this.health;
 
+    
     //prints out all the stats of the Enemy
     public void getEnemystats () {
         System.out.println(this.name + "'s Stats");
         System.out.println("Strength: " + this.strength);
-        System.out.println("Stamina: " + this.stamina);
         System.out.println("Health: " + this.health);
         try {
             Thread.sleep(3000);
@@ -45,16 +43,15 @@ public class Enemy {
     public void fight () {
         Scanner scan = new Scanner(System.in);
         Random r = new Random();
-        String decision = scan.next();
-        int fightingHealth = this.health;
         int input, attackdamage;
-
+        
         System.out.println("<Do you accept the fight? (y) (n)>");
+        String decision = scan.next();
 
         //deciding to fight
         if (decision.equalsIgnoreCase("y")) {
             //fights, until you or the enemy is dead / until you flee
-            while (fightingHealth > 0 || Enemy.playerHealth > 0) {
+            while (true) {
                 System.out.println("<It's your turn, what do you wish to do?>");
                 input = attackMenu();
                 //attack
@@ -62,16 +59,25 @@ public class Enemy {
                     System.out.println("<YOU ATTACKED>");
                     attackdamage = attack(Player.strength);
                     System.out.println("Your attack did " + attackdamage + " damage.");
-                    playerStamina -= 50;
+                    this.health = this.health - attackdamage;
+                    System.out.println("The Enemy is now at " + this.health + " health");
                 }
                 //heal
                 else if (input == 2) {
                     System.out.println("<YOU HEALED>");
                     playerHealth += r.nextInt(1, 10);
+                    if (playerHealth > Player.health) {
+                        playerHealth = Player.health;
+                    }
+                    System.out.println("<You healed up to " + playerHealth + " health>");
                 }
                 //special attack
                 else if (input == 3) {
-                    System.out.println("Will be a special attack");
+                    System.out.println("<YOU USED " + Player.specialMove + ">");
+                    attackdamage = attack(Player.specialMoveStrength);
+                    System.out.println("Your attack did " + attackdamage + " damage.");
+                    this.health -= attackdamage;
+                    System.out.println("The Enemy is now at " + this.health + " health");
                 }
                 //fleeing
                 else {
@@ -80,8 +86,12 @@ public class Enemy {
                 }
 
                 enemyTurn();
+
+                if ((this.health <= 0 ) || (Enemy.playerHealth <= 0)) {
+                    break;
+                }
             }
-            //TODO after the fight (if enemy loses or if you lose)
+            System.out.println("you win!");
         }
         else {
             System.out.println("<Be more prepared next Time>");
@@ -95,9 +105,9 @@ public class Enemy {
         int input;
         while (true) {
             System.out.println("------------------------------");
-            System.out.println("-- (1) Attack (50 stamina) -------");
-            System.out.println("-- (2) Heal (60 stamina) ---------");
-            System.out.println("-- (3) Special Attack (100 stamina) ");
+            System.out.println("-- (1) Attack ------------------");
+            System.out.println("-- (2) Heal --------------------");
+            System.out.println("-- (3) Special Attack (one use only)");
             System.out.println("-- (4) Flee (lose XP) ------------");
             System.out.println("-------------------------------");
             input = scan.nextInt();
@@ -107,15 +117,47 @@ public class Enemy {
             System.out.println("Error: Invalid Argument");
         }
     }
-
+    // enemies Turn
     public void enemyTurn () {
-        
+        Random r = new Random();
+        int decision = r.nextInt(1, 4);
+
+        // 2/3 chance it attacks
+        if (decision == 1 || decision == 2) {
+            System.out.println("<" + this.name + " attacks you!>");
+            int damage = attack(this.strength);
+            playerHealth -= damage;
+            System.out.println("<You take " + damage + " damage, your Health is now at " + playerHealth);
+        }
+
+        // 1/3 chance it heals itself
+        else if (decision == 3) {
+            System.out.println("<" + this.name + " heals itself!>");
+
+            // already at full health
+            if (this.health == enemyMaxHealth) {
+                System.out.println("<It was already at max health, how dumb!>");
+            }
+
+            // heals itself
+            else {
+                this.health = this.health + r.nextInt(1, 6);
+                System.out.println("<" + this.name + " is now at " + this.health + " health!>");
+            }
+        }
+        try {
+            Thread.sleep(3000);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return;
     }
 
     //returns attackdamage
     public int attack (int strength) {
         Random r = new Random();
-        int damage = strength * r.nextInt(1, 3) /2;
+        int damage = strength / 4 + r.nextInt(1, 4);
         return damage;
     }
 

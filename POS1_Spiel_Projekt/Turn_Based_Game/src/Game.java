@@ -6,7 +6,7 @@ import java.awt.Desktop;
 public class Game {
 
     // initialisieren der stat vars
-    public static int strength, stamina, health, chosenFighter;
+    public static int strength, health, chosenFighter;
     public static String specialMove, specialMove2, name;
 
     private static int i = 0;
@@ -136,19 +136,16 @@ public class Game {
         switch (chosenFighter) {
             case 1:
                 strength = 10;
-                stamina = 70;
                 health = 40;
                 specialMove = "Earthquake";
                 break;
             case 2:
                 strength = 20;
-                stamina = 60;
                 health = 20;
                 specialMove = "Thunder";
                 break;
             default:
                 strength = 5;
-                stamina = 100;
                 health = 70;
                 specialMove = "Roll";
                 break;
