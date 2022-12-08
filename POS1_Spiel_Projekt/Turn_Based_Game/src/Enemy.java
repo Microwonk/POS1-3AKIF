@@ -81,7 +81,10 @@ public class Enemy {
                 }
                 //fleeing
                 else {
+                    int xp = getXP(this.strength, enemyMaxHealth);
                     System.out.println("<Be more prepared next Time>");
+                    Menu.player.levelUp(-xp);
+                    System.out.println("<" + xp + " XP lost>");
                     return;
                 }
 
@@ -91,7 +94,19 @@ public class Enemy {
                     break;
                 }
             }
-            System.out.println("you win!");
+            int xp = getXP(this.strength, enemyMaxHealth);
+
+            if (this.health <= 0) {
+                System.out.println("<You win!>");
+                Menu.player.levelUp(xp);
+                System.out.println("<" + xp + " XP received>");
+            }
+            else if (Enemy.playerHealth <= 0) {
+                System.out.println("<You lose!>");
+                Menu.player.levelUp(-xp);
+                System.out.println("<" + xp + " XP lost>");
+            }
+            return;
         }
         else {
             System.out.println("<Be more prepared next Time>");
@@ -162,8 +177,8 @@ public class Enemy {
     }
 
     //calculates the amount of xp you get, when beating an enemy
-    public int getXP (int strength, int stamina, int health) {
-        return (strength + stamina + health) / 2;
+    public static int getXP (int strength, int health) {
+        return (strength + health) * 4;
     }
 
 
