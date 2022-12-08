@@ -1,8 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
-
+    
     static Player player = new Player(Game.chosenFighter, Game.strength, Game.stamina, Game.health, Game.specialMove, Game.name);
+    
     public Menu () {
 
     }
@@ -21,8 +22,9 @@ public class Menu {
         System.out.println("|         O O O  O  O  O OO         |");
         System.out.println("|         O O O   OO   O  O         |");
         System.out.println("+-----------------------------------+");
-
+        return;
     }
+    
     public static void showMenu () {
         System.out.println("===============Menu=================");
         System.out.println("------------------------------------");
@@ -34,15 +36,15 @@ public class Menu {
         System.out.println("------------------------------------");
         System.out.println("====================================");
         interactMenu();
+        return;
     }
-
+    
     public static void interactMenu() {
         Scanner scan = new Scanner(System.in);
         int input;
 
         while (true) {
-            System.out.print(": ");
-            input = scan.nextInt();
+            input = Integer.parseInt(scan.next());
             if (input == 1 || input == 2 || input == 3 || input == 4 || input == 5) {
                 break;
             }
@@ -50,7 +52,6 @@ public class Menu {
                 System.out.println("Error: Invalid Argument");
             }
         }
-        scan.close();
 
         switch (input) {
             case 1:
@@ -67,19 +68,21 @@ public class Menu {
                 showMenu();
                 break;
             case 4:
-                System.out.println("Will fight random Enemy");
+                Enemy enemy = new Enemy(player.level);
+                enemy.getEnemystats();
+                enemy.fight();
                 showMenu();
                 break;
             default:
                 System.out.println("-==-< Game ended >-==-");
                 break;
-
         }
     }
 
     private static int pointsSpent = 0;
 
     private static void leveling() {
+        Scanner scan = new Scanner(System.in);
         // figure out, how many points can be spent
         int levelpoints = player.level * 2 - pointsSpent;
 
@@ -92,53 +95,58 @@ public class Menu {
         System.out.println("-- (5) Change name -----------------");
         System.out.println("-- (6) Nevermind -------------------");
         System.out.println("------------------------------------");
-        System.out.println("------Points: " + levelpoints + "----------");
+        System.out.println("---------- Points: " + levelpoints + "------------------");
         System.out.println("====================================");
 
-        Scanner scan = new Scanner(System.in);
-        int input;
+        int levelingInput;
 
         while (true) {
             System.out.print(": ");
-            input = scan.nextInt();
-            if (input == 1 || input == 2 || input == 3 || input == 4 || input == 5 || input == 6 || input == 7) {
+            levelingInput = Integer.parseInt(scan.next());
+            if (levelingInput == 1 || levelingInput == 2 || levelingInput == 3 || levelingInput == 4 || levelingInput == 5 || levelingInput == 6 || levelingInput == 7) {
                 break;
             }
             else {
                 System.out.println("Error: Invalid Argument");
             }
         }
-        scan.close();
 
-        switch (input) {
-            case 1:
-                // Remember - pointsSpent++ when spending levelings
-                pointsSpent++;
+        if (levelpoints > 0) {
+            switch (levelingInput) {
+                case 1:
+                    // Remember - pointsSpent++ when spending levelings
+                    pointsSpent++;
+                    
+                    player.upgradeStrength();
+                    System.out.println("<Leveled Strength by one>");
+                    
+                    leveling();
+                    break;
+                case 2:
+                    pointsSpent++;
+                    
+                    player.upgradeHealth();
+                    System.out.println("<Leveled Health by two>");
+                    leveling();
+                    break;
+                case 3:
+                    pointsSpent++;
 
-                player.upgradeStrength();
-                leveling();
-                break;
-            case 2:
-                pointsSpent++;
-
-                player.upgradeHealth();
-                leveling();
-                break;
-            case 3:
-                pointsSpent++;
-
-                player.upgradeStamina();
-                leveling();
-                break;
-            case 4:
-                System.out.println("Will fight random Enemy");
-                leveling();
-                break;
-            default:
-                System.out.println("-==-< Game ended >-==-");
-                break;
-
+                    player.upgradeStamina();
+                    System.out.println("<Leveled Stamina by five>");
+                    leveling();
+                    break;
+                case 4:
+                    System.out.println("Will fight random Enemy");
+                    leveling();
+                    break;
+                default:
+                    return;
+            }
+        }
+        else if (levelingInput != 6) {
+            System.out.println("<Not enough Points>");
+            return;
         }
     }
-
 }
