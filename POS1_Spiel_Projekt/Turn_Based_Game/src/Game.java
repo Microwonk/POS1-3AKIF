@@ -132,6 +132,7 @@ public class Game {
         System.out.println();
 
 
+        // sets the stats of the player depending on their choice
 
         switch (chosenFighter) {
             case 1:
@@ -152,7 +153,6 @@ public class Game {
 
         }
 
-        //Player player = new Player(chosenFighter, strength, stamina, health, specialMove, name);
         Menu.intro();
         Menu.showMenu();
     }

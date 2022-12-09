@@ -8,6 +8,7 @@ public class Menu {
 
     }
 
+    // starting screen after setting char
     public static void intro() {
         System.out.println("+-----------------------------------+");
         System.out.println("|        OOO   O   O O  OOO         |");
@@ -25,12 +26,13 @@ public class Menu {
         return;
     }
     
+    // showing the Menu (home screen)
     public static void showMenu () {
         System.out.println("===============Menu=================");
         System.out.println("------------------------------------");
         System.out.println("-- (1) for showing Player Stats ----");
         System.out.println("-- (2) for leveling Menu -----------");
-        System.out.println("-- (3) for showing Defeated Enemies ");
+        System.out.println("-- (3) this is a temporary levelUp -- ");
         System.out.println("-- (4) for fighting random Enemy ---");
         System.out.println("-- (5) to Quit ---------------------");
         System.out.println("------------------------------------");
@@ -53,6 +55,7 @@ public class Menu {
             }
         }
 
+        // depending on input, starts methods
         switch (input) {
             case 1:
                 player.getStats();
@@ -75,6 +78,7 @@ public class Menu {
                 break;
             default:
                 System.out.println("-==-< Game ended >-==-");
+                scan.close();
                 break;
         }
     }
@@ -83,8 +87,10 @@ public class Menu {
 
     private static void leveling() {
         Scanner scan = new Scanner(System.in);
-        // figure out, how many points can be spent
+
+        // levelpoints declaration
         int levelpoints = player.level * 2 - pointsSpent;
+        int levelingInput;
 
         System.out.println("===========Leveling==Menu===========");
         System.out.println("------------------------------------");
@@ -97,8 +103,8 @@ public class Menu {
         System.out.println("---------- Points: " + levelpoints + "------------------");
         System.out.println("====================================");
 
-        int levelingInput;
 
+        // if there is no value 1-5, it spits out an error
         while (true) {
             System.out.print(": ");
             levelingInput = Integer.parseInt(scan.next());
@@ -110,10 +116,10 @@ public class Menu {
             }
         }
 
+        // upgrades by th choice made (only if enough points are available)
         if (levelpoints > 0) {
             switch (levelingInput) {
                 case 1:
-                    // Remember - pointsSpent++ when spending levelings
                     pointsSpent++;
                     
                     player.upgradeStrength();

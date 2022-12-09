@@ -3,13 +3,17 @@ import java.lang.Thread;
 
 public class Enemy {
     
-    private static int playerHealth = Player.health;
+    private static int playerHealth = Menu.player.health;
     
     private int strength, health;
     private String name;
     private static Random r = new Random();
     
-    //constructor (enemies get harder, the higher the player level is)
+    
+    /**
+     * constructor (enemies get harder, the higher the player level is)
+     * @param level Playerlevel, to which the difficulty is set
+     */
     public Enemy (int level) {
         if (level < 4) {
             this.strength = r.nextInt(1 * level, 10 * level );
@@ -44,6 +48,7 @@ public class Enemy {
         Scanner scan = new Scanner(System.in);
         Random r = new Random();
         int input, attackdamage;
+        boolean used = false;
         
         System.out.println("<Do you accept the fight? (y) (n)>");
         String decision = scan.next();
@@ -66,18 +71,27 @@ public class Enemy {
                 else if (input == 2) {
                     System.out.println("<YOU HEALED>");
                     playerHealth += r.nextInt(1, 10);
-                    if (playerHealth > Player.health) {
-                        playerHealth = Player.health;
+                    if (playerHealth > Menu.player.health) {
+                        playerHealth = Menu.player.health;
                     }
                     System.out.println("<You healed up to " + playerHealth + " health>");
                 }
                 //special attack
                 else if (input == 3) {
-                    System.out.println("<YOU USED " + Player.specialMove + ">");
-                    attackdamage = attack(Player.specialMoveStrength);
-                    System.out.println("Your attack did " + attackdamage + " damage.");
-                    this.health -= attackdamage;
-                    System.out.println("The Enemy is now at " + this.health + " health");
+                    // the attack has already been used this round
+                    if (used) {
+                        System.out.println("Already used special move!");
+                    }
+                    // using the special move, sets used to true
+                    else {
+                        System.out.println("<YOU USED " + Player.specialMove + ">");
+                        attackdamage = attack(Player.specialMoveStrength * 3);
+                        System.out.println("Your attack did " + attackdamage + " damage.");
+                        this.health -= attackdamage;
+                        System.out.println("The Enemy is now at " + this.health + " health");
+                        used = true;
+                    }
+                        
                 }
                 //fleeing
                 else {
@@ -85,10 +99,19 @@ public class Enemy {
                     System.out.println("<Be more prepared next Time>");
                     Menu.player.levelUp(-xp);
                     System.out.println("<" + xp + " XP lost>");
+
+                    //resets the health after every fight
+                    playerHealth = Menu.player.health;
                     return;
                 }
 
-                enemyTurn();
+                // if it dies, no move can be done by the enemy
+                if (this.health > 0) {
+                    enemyTurn();
+                }
+                else {
+                    System.out.println(this.name + " died!");
+                }
 
                 if ((this.health <= 0 ) || (Enemy.playerHealth <= 0)) {
                     break;
@@ -96,16 +119,20 @@ public class Enemy {
             }
             int xp = getXP(this.strength, enemyMaxHealth);
 
+            //if you win
             if (this.health <= 0) {
                 System.out.println("<You win!>");
                 Menu.player.levelUp(xp);
                 System.out.println("<" + xp + " XP received>");
             }
+            //if you lost
             else if (Enemy.playerHealth <= 0) {
                 System.out.println("<You lose!>");
                 Menu.player.levelUp(-xp);
                 System.out.println("<" + xp + " XP lost>");
             }
+            //resets the health after every fight
+            playerHealth = Menu.player.health;
             return;
         }
         else {
@@ -156,10 +183,12 @@ public class Enemy {
 
             // heals itself
             else {
+                // can heal itself above its actual healthpool /fix?
                 this.health = this.health + r.nextInt(1, 6);
                 System.out.println("<" + this.name + " is now at " + this.health + " health!>");
             }
         }
+        // delay, so that its easier to see
         try {
             Thread.sleep(3000);
         }
@@ -178,10 +207,10 @@ public class Enemy {
 
     //calculates the amount of xp you get, when beating an enemy
     public static int getXP (int strength, int health) {
-        return (strength + health) * 4;
+        return (strength + health) * 5;
     }
 
-
+    // array of all pokemon names
     private static String[] nameArray = {
         "Abomasnow",
         "Abra",
