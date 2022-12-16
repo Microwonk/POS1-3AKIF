@@ -3,9 +3,11 @@ import java.lang.Thread;
 
 public class Enemy {
     
-    private static int playerHealth = Menu.player.health;
+    public Player player = Menu.player;
+
+    private int playerHealth = this.player.health;
     
-    private int strength, health;
+    private int strength, health, maxHealth;
     private String name;
     private static Random r = new Random();
     
@@ -24,9 +26,10 @@ public class Enemy {
             this.health = r.nextInt(20, 100);
         }
         this.name = nameArray[r.nextInt(0, nameArray.length - 1)];
+        this.maxHealth = this.health;
+        
         return;
     }
-    public int enemyMaxHealth = this.health;
 
     
     //prints out all the stats of the Enemy
@@ -35,7 +38,7 @@ public class Enemy {
         System.out.println("Strength: " + this.strength);
         System.out.println("Health: " + this.health);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         }
         catch (Exception e) {
             System.out.println(e);
@@ -62,7 +65,7 @@ public class Enemy {
                 //attack
                 if (input == 1) {
                     System.out.println("<YOU ATTACKED>");
-                    attackdamage = attack(Player.strength);
+                    attackdamage = attack(player.strength);
                     System.out.println("Your attack did " + attackdamage + " damage.");
                     this.health = this.health - attackdamage;
                     System.out.println("The Enemy is now at " + this.health + " health");
@@ -71,8 +74,8 @@ public class Enemy {
                 else if (input == 2) {
                     System.out.println("<YOU HEALED>");
                     playerHealth += r.nextInt(1, 10);
-                    if (playerHealth > Menu.player.health) {
-                        playerHealth = Menu.player.health;
+                    if (playerHealth > player.health) {
+                        playerHealth = player.health;
                     }
                     System.out.println("<You healed up to " + playerHealth + " health>");
                 }
@@ -84,8 +87,8 @@ public class Enemy {
                     }
                     // using the special move, sets used to true
                     else {
-                        System.out.println("<YOU USED " + Player.specialMove + ">");
-                        attackdamage = attack(Player.specialMoveStrength * 3);
+                        System.out.println("<YOU USED " + player.specialMove + ">");
+                        attackdamage = attack(player.specialMoveStrength * 3);
                         System.out.println("Your attack did " + attackdamage + " damage.");
                         this.health -= attackdamage;
                         System.out.println("The Enemy is now at " + this.health + " health");
@@ -95,13 +98,13 @@ public class Enemy {
                 }
                 //fleeing
                 else {
-                    int xp = getXP(this.strength, enemyMaxHealth);
+                    int xp = getXP(this.strength, this.maxHealth);
                     System.out.println("<Be more prepared next Time>");
                     Menu.player.levelUp(-xp);
                     System.out.println("<" + xp + " XP lost>");
 
                     //resets the health after every fight
-                    playerHealth = Menu.player.health;
+                    playerHealth = player.health;
                     return;
                 }
 
@@ -113,11 +116,11 @@ public class Enemy {
                     System.out.println(this.name + " died!");
                 }
 
-                if ((this.health <= 0 ) || (Enemy.playerHealth <= 0)) {
+                if ((this.health <= 0 ) || (playerHealth <= 0)) {
                     break;
                 }
             }
-            int xp = getXP(this.strength, enemyMaxHealth);
+            int xp = getXP(this.strength, this.maxHealth);
 
             //if you win
             if (this.health <= 0) {
@@ -126,7 +129,7 @@ public class Enemy {
                 System.out.println("<" + xp + " XP received>");
             }
             //if you lost
-            else if (Enemy.playerHealth <= 0) {
+            else if (playerHealth <= 0) {
                 System.out.println("<You lose!>");
                 Menu.player.levelUp(-xp);
                 System.out.println("<" + xp + " XP lost>");
@@ -159,6 +162,7 @@ public class Enemy {
             System.out.println("Error: Invalid Argument");
         }
     }
+
     // enemies Turn
     public void enemyTurn () {
         Random r = new Random();
@@ -169,28 +173,29 @@ public class Enemy {
             System.out.println("<" + this.name + " attacks you!>");
             int damage = attack(this.strength);
             playerHealth -= damage;
+            if (playerHealth < 0) {
+                playerHealth = 0;
+            }
             System.out.println("<You take " + damage + " damage, your Health is now at " + playerHealth);
         }
 
         // 1/3 chance it heals itself
         else if (decision == 3) {
             System.out.println("<" + this.name + " heals itself!>");
+            this.health += r.nextInt(1, 6);
 
-            // already at full health
-            if (this.health == enemyMaxHealth) {
-                System.out.println("<It was already at max health, how dumb!>");
+            if (this.health > maxHealth) {
+                this.health = maxHealth;
             }
+            else if (this.health < 0) {
+                this.health = 0;
+            }
+            System.out.println("<" + this.name + " is now at " + this.health + " health!>");
 
-            // heals itself
-            else {
-                // can heal itself above its actual healthpool /fix?
-                this.health = this.health + r.nextInt(1, 6);
-                System.out.println("<" + this.name + " is now at " + this.health + " health!>");
-            }
         }
         // delay, so that its easier to see
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         }
         catch (Exception e) {
             System.out.println(e);

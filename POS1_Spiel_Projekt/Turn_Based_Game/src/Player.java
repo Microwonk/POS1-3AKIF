@@ -2,33 +2,41 @@ import java.lang.Thread;
 public class Player {
 
     // level default is set to 1
-    int level = 1;
-    static int type, strength, health, levelxp, specialMoveStrength;
-    static String specialMove, name;
+    int type, strength, health, specialMoveStrength, level, levelxp;
+    String specialMove, name;
 
     // construcor of all attributes of the player
     public Player(int type, int strength, int health, String specialMove, String name, int specialMoveStrength) {
-        Player.type = type;
-        Player.strength = strength;
-        Player.health = health;
-        Player.specialMove = specialMove;
-        Player.name = name;
-        Player.specialMoveStrength = specialMoveStrength;
+        this.type = type;
+        this.strength = strength;
+        this.health = health;
+        this.specialMove = specialMove;
+        this.name = name;
+        this.specialMoveStrength = specialMoveStrength;
+
+        if (Starting.savingChoice == 2) {
+            this.levelxp = Starting.levelxp;
+            this.level = Starting.level;
+        }
+        else {
+            this.levelxp = 0;
+            this.level = 1;
+        }
         return;
     }
 
     // prints out all the stats of Player
     public void getStats () {
-        System.out.println("----==-< " + name + "'s Stats >-==----");
-        System.out.println("Type: " + type);
-        System.out.println("Strength: " + strength);
-        System.out.println("Health: " + health);
-        System.out.println("Special Move: " + specialMove);
-        System.out.println("Level: " + level + " (" + (levelxp) + "/100 until next Level)");
+        System.out.println("----==-< " + this.name + "'s Stats >-==----");
+        System.out.println("Type: " + this.type);
+        System.out.println("Strength: " + this.strength);
+        System.out.println("Health: " + this.health);
+        System.out.println("Special Move: " + this.specialMove);
+        System.out.println("Level: " + this.level + " (" + (this.levelxp) + "/100 until next Level)");
         
         // delay to make it visible for longer
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         }
         catch (Exception e) {
             System.out.println(e);
@@ -38,37 +46,42 @@ public class Player {
 
     // method for leveling up and collecting xp
     public void levelUp (int xp) {
-        levelxp = levelxp + xp;
+        this.levelxp = this.levelxp + xp;
+
+        if (this.levelxp < 0) {
+            this.levelxp = 0;
+        }
+        
         // 100 is the threshhold for reaching the next level
-        if (levelxp >= 100) {
+        if (this.levelxp >= 100) {
             this.level++;
 
-            levelxp = levelxp%100;
+            this.levelxp = this.levelxp%100;
         }
         return;
     }
 
     // Upgrades Strength by one
     public void upgradeStrength () {
-        Player.strength++;
+        this.strength++;
         return;
     }
 
     // Upgrades Health by two
     public void upgradeHealth () {
-        Player.health+=2;
+        this.health+=2;
         return;
     }
 
     // changes name
     public void changeName (String newName) {
-        Player.name = newName;
+        this.name = newName;
         return;
     }
 
     // Upgrades special ability
     public void upgradeSpecialMoveStrength () {
-        Player.specialMoveStrength += 5;
+        this.specialMoveStrength += 5;
     }
 
 }

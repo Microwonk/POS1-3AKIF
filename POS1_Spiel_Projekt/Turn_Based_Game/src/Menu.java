@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Menu {
     
-    static Player player = new Player(Game.chosenFighter, Game.strength, Game.health, Game.specialMove, Game.name, Game.strength * 2);
+    public static Player player = new Player(Starting.chosenFighter, Starting.strength, Starting.health, Starting.specialMove, Starting.name, Starting.specialMoveStrength);
+    
     
     public Menu () {
 
@@ -55,6 +57,7 @@ public class Menu {
             }
         }
 
+
         // depending on input, starts methods
         switch (input) {
             case 1:
@@ -77,9 +80,20 @@ public class Menu {
                 showMenu();
                 break;
             default:
+                System.out.println("Do you want to save? (y) (n)");
+                String savingDecision = scan.next();
+
+                if (savingDecision.equalsIgnoreCase("y")) {
+                    try {
+                        Save.saving();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 System.out.println("-==-< Game ended >-==-");
                 scan.close();
-                break;
+                return;
         }
     }
 
@@ -96,11 +110,11 @@ public class Menu {
         System.out.println("------------------------------------");
         System.out.println("-- (1) Upgrade strength by one -----");
         System.out.println("-- (2) Upgrade health by two -------");
-        System.out.println("-- (3) Upgrade " + Game.specialMove);
+        System.out.println("-- (3) Upgrade " + Starting.specialMove);
         System.out.println("-- (4) Change name -----------------");
         System.out.println("-- (5) Nevermind -------------------");
         System.out.println("------------------------------------");
-        System.out.println("---------- Points: " + levelpoints + "------------------");
+        System.out.println("-------- Points: " + levelpoints + " ---------");
         System.out.println("====================================");
 
 
@@ -116,7 +130,8 @@ public class Menu {
             }
         }
 
-        // upgrades by th choice made (only if enough points are available)
+        // upgrades by the choice made (only if enough points are available)
+
         if (levelpoints > 0) {
             switch (levelingInput) {
                 case 1:
@@ -138,7 +153,7 @@ public class Menu {
                     pointsSpent++;
 
                     player.upgradeSpecialMoveStrength();
-                    System.out.println("<Upgraded " + Game.specialMove +">");
+                    System.out.println("<Upgraded " + Starting.specialMove +">");
 
                     leveling();
                     break;
