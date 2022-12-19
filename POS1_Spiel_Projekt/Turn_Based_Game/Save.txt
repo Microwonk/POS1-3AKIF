@@ -1,1 +1,1 @@
-2 20 20 Thunder Manaphy 40 1 0
+3 5 70 Roll Manaphy 10 1 0
