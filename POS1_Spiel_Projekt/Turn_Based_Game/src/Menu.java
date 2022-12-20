@@ -34,7 +34,7 @@ public class Menu {
         System.out.println("------------------------------------");
         System.out.println("-- (1) for showing Player Stats ----");
         System.out.println("-- (2) for leveling Menu -----------");
-        System.out.println("-- (3) this is a temporary levelUp -- ");
+        System.out.println("-- (3) show defeated Enemies ----- ");
         System.out.println("-- (4) for fighting random Enemy ---");
         System.out.println("-- (5) to Quit ---------------------");
         System.out.println("------------------------------------");
@@ -69,8 +69,7 @@ public class Menu {
                 showMenu();
                 break;
             case 3:
-                System.out.println("temp level up");
-                player.levelUp(30);
+                System.out.println();
                 showMenu();
                 break;
             case 4:

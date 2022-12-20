@@ -1,1 +1,1 @@
-3 5 70 Roll Manaphy 10 1 0
+2 20 22 Thunder Pikachu 45 4 95
