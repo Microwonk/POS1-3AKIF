@@ -8,6 +8,10 @@ public class Main {
 
         Giraffe gerald = new Giraffe("gerald.png", "Gerald", 12);
 
+        int age = olive.age;
+
+        kiwi.birthday();
+
         olive.makeSound();
         kiwi.makeSound();
         mable.makeSound();
