@@ -4,12 +4,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class Core {
-    
-    public static Player player = Main.player;
-    private List<Enemy> allEnemies = new ArrayList<>();
+
+    // übernahme vom player der Main Klasse
+    public static Player player;
+
+    // List of all Enemies, that are beaten
+    private List<Enemy> allEnemies;
+    private int pointsSpent;
 
     public Core() {
-
+        pointsSpent = 0;
+        player = Main.player;
+        allEnemies = new ArrayList<>();
     }
 
     // showing the Menu (home screen)
@@ -25,7 +31,8 @@ public class Core {
         System.out.println("====================================");
         interactMenu();
     }
-    
+
+    // Menu mit Auswahl
     public void interactMenu() {
         Scanner scan = new Scanner(System.in);
         int input;
@@ -41,7 +48,7 @@ public class Core {
         }
 
 
-        // depending on input, starts methods
+        // depending on input, starts methods needed to do that particular choice
         switch (input) {
             case 1 -> {
                 player.showStats();
@@ -82,13 +89,12 @@ public class Core {
         }
     }
 
-    private static int pointsSpent = 0;
-
+    // leveling Menu
     private void leveling() {
         Scanner scan = new Scanner(System.in);
 
         // levelpoints declaration
-        int levelpoints = player.getLevel() * 2 - pointsSpent;
+        int levelPoints = player.getLevel() * 2 - this.pointsSpent;
         int levelingInput;
 
         System.out.println("===========Leveling==Menu===========");
@@ -99,7 +105,7 @@ public class Core {
         System.out.println("-- (4) Change name -----------------");
         System.out.println("-- (5) Nevermind -------------------");
         System.out.println("------------------------------------");
-        System.out.println("-------- Points: " + levelpoints + " ---------");
+        System.out.println("-------- Points: " + levelPoints + " ---------");
         System.out.println("====================================");
 
 
@@ -117,10 +123,10 @@ public class Core {
 
         // upgrades by the choice made (only if enough points are available)
 
-        if (levelpoints > 0) {
+        if (levelPoints > 0) {
             switch (levelingInput) {
                 case 1:
-                    pointsSpent++;
+                    this.pointsSpent++;
                     
                     player.upgradeStrength();
                     System.out.println("<Leveled Strength by one>");
@@ -128,14 +134,14 @@ public class Core {
                     leveling();
                     break;
                 case 2:
-                    pointsSpent++;
+                    this.pointsSpent++;
                     
                     player.upgradeHealth();
                     System.out.println("<Leveled Health by two>");
                     leveling();
                     break;
                 case 3:
-                    pointsSpent++;
+                    this.pointsSpent++;
 
                     player.upgradeSpecialMoveStrength();
                     System.out.println("<Upgraded " + Starting.specialMove +">");
@@ -143,7 +149,7 @@ public class Core {
                     leveling();
                     break;
                 case 4:
-                    pointsSpent++;
+                    this.pointsSpent++;
                     System.out.println("Your Pokemons new Name: ");
                     String newName = scan.next();
 
@@ -156,6 +162,7 @@ public class Core {
         }
     }
 
+    // lists all Enemies beaten
     public void showAllEnemies() {
         int i = 0;
         Scanner scan = new Scanner(System.in);

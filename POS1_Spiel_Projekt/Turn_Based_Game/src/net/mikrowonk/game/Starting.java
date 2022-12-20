@@ -6,14 +6,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Starting {
-
-    // initialisieren der stat vars
     protected static int strength, health, type, specialMoveStrength, level, levelXp;
     protected static String specialMove, name;
     protected static int savingChoice;
 
     public Starting (){
-
     }
 
     /**
@@ -31,7 +28,7 @@ public class Starting {
         if (savingChoice == 2) {
             try {
                 Save s = new Save();
-                player = s.getSave();
+                player = (Player)s.getPlayerSave();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,6 +102,6 @@ public class Starting {
         }
         specialMoveStrength = strength * 2;
         }
-        return new Player(strength, health, specialMove, name, specialMoveStrength);
+        return new Player(strength, health, specialMove, name, specialMoveStrength, 0, 1);
     }
 }

@@ -44,7 +44,7 @@ public class Fight {
             input = attackMenu();
             //attack
             if (input == 1) {
-                attackDamage(true);
+                attack(true);
             }
             //heal
             else if (input == 2) {
@@ -70,6 +70,7 @@ public class Fight {
             }
 
             // if it dies, no move can be done by the enemy
+
             if (this.enemy.health > 0) {
                 enemyTurn();
             }
@@ -77,6 +78,7 @@ public class Fight {
                 scrollText("<" + this.enemy.name + " died!>");
             }
 
+            // calculates the xp the player receives/loses
             int xp = getXP(this.enemy.strength, this.enemyMaxHealth);
 
             //if you win
@@ -128,7 +130,7 @@ public class Fight {
 
         // 2/3 chance it attacks
         if (decision == 1 || decision == 2) {
-            attackDamage(false);
+            attack(false);
         }
 
         // 1/3 chance it heals itself
@@ -150,22 +152,24 @@ public class Fight {
         return strength / 4 + r.nextInt(1, 4);
     }
 
-    public void attackDamage(boolean isPlayer) {
-        String opponentName = "";
+    // der ganze Angriffsablauf
+    public void attack(boolean isPlayer) {
 
         if (isPlayer) {
             bufferedText("<" + this.player.name + " ATTACKED>");
-            bufferedText("<The attack did " + attackDamage(this.player.strength) + " damage>");
-            this.enemy.health -= attackDamage(this.player.strength);
+            int attackDamage = attackDamage(this.player.strength);
+            bufferedText("<The attack did " + attackDamage + " damage>");
+            this.enemy.health -= attackDamage;
             if (this.enemy.health <= 0) {
                 this.enemy.health = 0;
             }
             bufferedText("<" + this.enemy.name + " is now at " + this.enemy.health + " health");
         }
         else {
+            int attackDamage = attackDamage(this.enemy.strength);
             bufferedText("<" + this.enemy.name + " ATTACKED>");
-            bufferedText("<The attack did " + attackDamage(this.enemy.strength) + " damage>");
-            this.player.health -= attackDamage(this.enemy.strength);
+            bufferedText("<The attack did " + attackDamage + " damage>");
+            this.player.health -= attackDamage;
             if (this.player.health <= 0) {
                 this.player.health = 0;
             }
@@ -173,6 +177,7 @@ public class Fight {
         }
     }
 
+    // der ganze Heilungsablauf
     public void heal(Entity playerOrEnemy) {
         bufferedText("<" + playerOrEnemy.name + " HEALED>");
         if (playerOrEnemy.equals(enemy)) {
@@ -197,9 +202,10 @@ public class Fight {
         }
         // using the special move, sets used to true
         else {
+            int specialAttackDamage = attackDamage(player.getSpecialMoveStrength());
             bufferedText("<" + this.player.name + " used " + this.player.getSpecialMove() + "!>");
-            bufferedText("Your attack did " + attackDamage(player.getSpecialMoveStrength()) + " damage.");
-            this.enemy.health -= attackDamage(player.getSpecialMoveStrength());
+            bufferedText("Your attack did " + specialAttackDamage + " damage.");
+            this.enemy.health -= specialAttackDamage;
             bufferedText("<" + this.enemy.name + " is now at " + this.enemy.health + " health>");
             this.usedSpecialAttack = true;
         }
@@ -226,6 +232,7 @@ public class Fight {
         }
     }
 
+    // to make the Text animation a bit more interesting
     public void bufferedText(String text) {
         System.out.println(text);
         try {
@@ -236,6 +243,7 @@ public class Fight {
         }
     }
 
+    // checks, if the player won, if so, then the instance of the enemy is saved to the list of beaten Enemies
     public boolean getWon () {
         return won;
     }

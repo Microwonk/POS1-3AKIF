@@ -3,11 +3,9 @@ package net.mikrowonk.game;
 import java.io.*;
 
 public class Save {
-
     private Player player;
 
     public Save() {
-
     }
     public Save (Player player) {
         this.player = player;
@@ -15,7 +13,6 @@ public class Save {
 
     public void saving () throws IOException {
         PrintWriter out = new PrintWriter("Save.txt");
-
         out.print(this.player.getStrength() + " ");
         out.print(this.player.getHealth() + " ");
         out.print(this.player.getSpecialMove() + " ");
@@ -23,11 +20,14 @@ public class Save {
         out.print(this.player.getSpecialMoveStrength() + " ");
         out.print(this.player.getLevel() + " ");
         out.print(this.player.getLevelXp());
-        
         out.close();
     }
 
-    public Player getSave () throws IOException{
+    /**
+     *
+     * @return a player, mit den Werten des gespeichertem
+     */
+    public Entity getPlayerSave() throws IOException{
         int i = 0;
         int statCounter = 0;
         int startOfNext = 0;
@@ -45,6 +45,8 @@ public class Save {
             else if (stats.charAt(i) == ' ') {
                 //final int temp = Integer.parseInt(stats.substring(startOfNext, i));
                 switch (statCounter) {
+                    // TODO optimierung
+                    // int temp = Integer.parseInt(stats.substring(startOfNext, i)); geht nicht, wieso?
                     case 0 -> playerReturn.setStrength(Integer.parseInt(stats.substring(startOfNext, i)));
                     case 1 -> playerReturn.setHealth(Integer.parseInt(stats.substring(startOfNext, i)));
                     case 2 -> playerReturn.setSpecialMove(stats.substring(startOfNext, i));

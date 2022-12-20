@@ -14,7 +14,7 @@ public class Player extends Entity {
     }
 
     // constructor of all attributes of the player
-    public Player(int strength, int health, String specialMove, String name, int specialMoveStrength) {
+    public Player(int strength, int health, String specialMove, String name, int specialMoveStrength, int levelXp, int level) {
         super(strength, health, name);
         this.specialMove = specialMove;
         this.specialMoveStrength = specialMoveStrength;
