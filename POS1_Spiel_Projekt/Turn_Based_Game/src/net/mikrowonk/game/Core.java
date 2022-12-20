@@ -1,35 +1,19 @@
+package net.mikrowonk.game;
+
 import java.io.IOException;
 import java.util.*;
 
-public class Menu {
+public class Core {
     
-    public static Player player = new Player(Starting.chosenFighter, Starting.strength, Starting.health, Starting.specialMove, Starting.name, Starting.specialMoveStrength);
-    
-    
-    public Menu () {
+    public static Player player = Main.player;
+    private List<Enemy> allEnemies = new ArrayList<>();
+
+    public Core() {
 
     }
 
-    // starting screen after setting char
-    public static void intro() {
-        System.out.println("+-----------------------------------+");
-        System.out.println("|        OOO   O   O O  OOO         |");
-        System.out.println("|        O O  O O  OO   O           |");
-        System.out.println("|        OOO  O O  O    OO          |");
-        System.out.println("|        O    O O  OO   O           |");
-        System.out.println("|        O     O   O O  OOO         |");
-        System.out.println("|                                   |");
-        System.out.println("|         O   O   OO   O  O         |");
-        System.out.println("|         OO OO  O  O  OO O         |");
-        System.out.println("|         OO OO  O  O  OO O         |");
-        System.out.println("|         O O O  O  O  O OO         |");
-        System.out.println("|         O O O   OO   O  O         |");
-        System.out.println("+-----------------------------------+");
-        return;
-    }
-    
     // showing the Menu (home screen)
-    public static void showMenu () {
+    public void showMenu () {
         System.out.println("===============Menu=================");
         System.out.println("------------------------------------");
         System.out.println("-- (1) for showing Player Stats ----");
@@ -40,10 +24,9 @@ public class Menu {
         System.out.println("------------------------------------");
         System.out.println("====================================");
         interactMenu();
-        return;
     }
     
-    public static void interactMenu() {
+    public void interactMenu() {
         Scanner scan = new Scanner(System.in);
         int input;
 
@@ -60,56 +43,59 @@ public class Menu {
 
         // depending on input, starts methods
         switch (input) {
-            case 1:
-                player.getStats();
+            case 1 -> {
+                player.showStats();
                 showMenu();
-                break;
-            case 2:
-                Menu.leveling();
+            }
+            case 2 -> {
+                leveling();
                 showMenu();
-                break;
-            case 3:
-                System.out.println();
+            }
+            case 3 -> {
+                showAllEnemies();
                 showMenu();
-                break;
-            case 4:
-                Enemy enemy = new Enemy(player.level);
-                enemy.getEnemystats();
-                enemy.fight();
+            }
+            case 4 -> {
+                Enemy enemy = new Enemy();
+                Fight f = new Fight(enemy, player);
+                f.fight();
+                if (f.getWon()) {
+                    allEnemies.add(enemy);
+                }
                 showMenu();
-                break;
-            default:
+            }
+            default -> {
                 System.out.println("Do you want to save? (y) (n)");
                 String savingDecision = scan.next();
-
                 if (savingDecision.equalsIgnoreCase("y")) {
                     try {
-                        Save.saving();
+                        Save s = new Save(player);
+                        s.saving();
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-
                 System.out.println("-==-< Game ended >-==-");
                 scan.close();
-                return;
+            }
         }
     }
 
     private static int pointsSpent = 0;
 
-    private static void leveling() {
+    private void leveling() {
         Scanner scan = new Scanner(System.in);
 
         // levelpoints declaration
-        int levelpoints = player.level * 2 - pointsSpent;
+        int levelpoints = player.getLevel() * 2 - pointsSpent;
         int levelingInput;
 
         System.out.println("===========Leveling==Menu===========");
         System.out.println("------------------------------------");
         System.out.println("-- (1) Upgrade strength by one -----");
         System.out.println("-- (2) Upgrade health by two -------");
-        System.out.println("-- (3) Upgrade " + Starting.specialMove);
+        System.out.println("-- (3) Upgrade " + player.getSpecialMove());
         System.out.println("-- (4) Change name -----------------");
         System.out.println("-- (5) Nevermind -------------------");
         System.out.println("------------------------------------");
@@ -163,13 +149,32 @@ public class Menu {
 
                     player.changeName(newName);
                 default:
-                    return;
             }
         }
         else if (levelingInput != 5) {
             System.out.println("<Not enough Points>");
+        }
+    }
+
+    public void showAllEnemies() {
+        int i = 0;
+        Scanner scan = new Scanner(System.in);
+        for (Enemy enemy : allEnemies) {
+            enemy.showStats();
+            System.out.println("Index: " + i);
+            System.out.println();
+            i++;
+        }
+        System.out.println("<If you want to fight a previous Pokémon, enter it's index (-1 to leave)>");
+        int decision = Integer.parseInt(scan.next());
+        if (decision < 0 || decision > i) {
             return;
         }
-        return;
+        Enemy enemy = allEnemies.get(decision);
+        Fight f = new Fight(enemy, player);
+        f.fight();
+        if (f.getWon()) {
+            allEnemies.add(enemy);
+        }
     }
 }
