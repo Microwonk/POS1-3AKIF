@@ -9,24 +9,21 @@ public class Player extends Entity {
     private int levelXp;
     private String specialMove;
 
+    private int pointsSpent;
+
     public Player() {
 
     }
 
     // constructor of all attributes of the player
-    public Player(int strength, int health, String specialMove, String name, int specialMoveStrength, int levelXp, int level) {
+    public Player(int strength, int health, String specialMove, String name, int specialMoveStrength, int levelXp, int level, int pointsSpent) {
         super(strength, health, name);
         this.specialMove = specialMove;
         this.specialMoveStrength = specialMoveStrength;
+        this.levelXp = levelXp;
+        this.level = level;
+        this.pointsSpent = pointsSpent;
 
-        if (Starting.savingChoice == 2) {
-            this.levelXp = Starting.levelXp;
-            this.level = Starting.level;
-        }
-        else {
-            this.levelXp = 0;
-            this.level = 1;
-        }
     }
 
     // prints out all the stats of Player
@@ -118,5 +115,13 @@ public class Player extends Entity {
 
     public void setSpecialMoveStrength(int specialMoveStrength) {
         this.specialMoveStrength = specialMoveStrength;
+    }
+
+    public int getPointsSpent() {
+        return pointsSpent;
+    }
+
+    public void setPointsSpent(int pointsSpent) {
+        this.pointsSpent = pointsSpent;
     }
 }

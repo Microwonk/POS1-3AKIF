@@ -10,10 +10,8 @@ public class Core {
 
     // List of all Enemies, that are beaten
     private List<Enemy> allEnemies;
-    private int pointsSpent;
 
     public Core() {
-        pointsSpent = 0;
         player = Main.player;
         allEnemies = new ArrayList<>();
     }
@@ -94,7 +92,7 @@ public class Core {
         Scanner scan = new Scanner(System.in);
 
         // levelpoints declaration
-        int levelPoints = player.getLevel() * 2 - this.pointsSpent;
+        int levelPoints = player.getLevel() * 2 - player.getPointsSpent();
         int levelingInput;
 
         System.out.println("===========Leveling==Menu===========");
@@ -126,7 +124,7 @@ public class Core {
         if (levelPoints > 0) {
             switch (levelingInput) {
                 case 1:
-                    this.pointsSpent++;
+                    player.setPointsSpent(player.getPointsSpent() + 1);
                     
                     player.upgradeStrength();
                     System.out.println("<Leveled Strength by one>");
@@ -134,14 +132,14 @@ public class Core {
                     leveling();
                     break;
                 case 2:
-                    this.pointsSpent++;
+                    player.setPointsSpent(player.getPointsSpent() + 1);
                     
                     player.upgradeHealth();
                     System.out.println("<Leveled Health by two>");
                     leveling();
                     break;
                 case 3:
-                    this.pointsSpent++;
+                    player.setPointsSpent(player.getPointsSpent() + 1);
 
                     player.upgradeSpecialMoveStrength();
                     System.out.println("<Upgraded " + Starting.specialMove +">");
@@ -149,7 +147,7 @@ public class Core {
                     leveling();
                     break;
                 case 4:
-                    this.pointsSpent++;
+                    player.setPointsSpent(player.getPointsSpent() + 1);
                     System.out.println("Your Pokemons new Name: ");
                     String newName = scan.next();
 

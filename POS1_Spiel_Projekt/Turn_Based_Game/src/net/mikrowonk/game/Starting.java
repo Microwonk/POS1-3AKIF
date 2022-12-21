@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Starting {
-    protected static int strength, health, type, specialMoveStrength, level, levelXp;
+    protected static int strength, health, type, specialMoveStrength;
     protected static String specialMove, name;
-    protected static int savingChoice;
 
     public Starting (){
     }
@@ -23,7 +22,7 @@ public class Starting {
         Player player = null;
 
         System.out.println("New Game(1) or start from Save(2)?");
-        savingChoice = scan.nextInt();
+        int savingChoice = scan.nextInt();
 
         if (savingChoice == 2) {
             try {
@@ -102,6 +101,6 @@ public class Starting {
         }
         specialMoveStrength = strength * 2;
         }
-        return new Player(strength, health, specialMove, name, specialMoveStrength, 0, 1);
+        return new Player(strength, health, specialMove, name, specialMoveStrength, 0, 1, 0);
     }
 }

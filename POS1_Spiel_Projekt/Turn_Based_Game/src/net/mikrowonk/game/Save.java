@@ -19,7 +19,8 @@ public class Save {
         out.print(this.player.getName() + " ");
         out.print(this.player.getSpecialMoveStrength() + " ");
         out.print(this.player.getLevel() + " ");
-        out.print(this.player.getLevelXp());
+        out.print(this.player.getLevelXp() + " ");
+        out.print(this.player.getPointsSpent());
         out.close();
     }
 
@@ -53,6 +54,7 @@ public class Save {
                     case 3 -> playerReturn.setName(stats.substring(startOfNext, i));
                     case 4 -> playerReturn.setSpecialMoveStrength(Integer.parseInt(stats.substring(startOfNext, i)));
                     case 5 -> playerReturn.setLevel(Integer.parseInt(stats.substring(startOfNext, i)));
+                    case 6 -> playerReturn.setPointsSpent(Integer.parseInt(stats.substring(startOfNext, i)));
                 }
                 startOfNext = i + 1;
                 statCounter++;
