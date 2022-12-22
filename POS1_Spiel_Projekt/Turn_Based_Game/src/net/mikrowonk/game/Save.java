@@ -12,7 +12,8 @@ public class Save {
     }
 
     public void saving () throws IOException {
-        PrintWriter out = new PrintWriter("Save.txt");
+        File file = new File("src/net/mikrowonk/saves/Save.txt");
+        PrintWriter out = new PrintWriter(file);
         out.print(this.player.getStrength() + " ");
         out.print(this.player.getHealth() + " ");
         out.print(this.player.getSpecialMove() + " ");
@@ -28,12 +29,12 @@ public class Save {
      *
      * @return a player, mit den Werten des gespeichertem
      */
-    public Entity getPlayerSave() throws IOException{
+    public Player getPlayerSave() throws IOException{
         int i = 0;
         int statCounter = 0;
         int startOfNext = 0;
         Player playerReturn = new Player();
-        File save = new File("Save.txt");
+        File save = new File("src/net/mikrowonk/saves/Save.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(save));
         String stats = br.readLine();

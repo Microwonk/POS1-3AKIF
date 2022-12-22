@@ -70,16 +70,10 @@ public class Player extends Entity {
         this.health+=2;
     }
 
-    // changes name
-    public void changeName (String newName) {
-        this.name = newName;
-    }
-
     // Upgrades special ability
     public void upgradeSpecialMoveStrength () {
         this.specialMoveStrength += 5;
     }
-
 
     public int getLevel() {
         return level;
@@ -91,10 +85,6 @@ public class Player extends Entity {
 
     public int getSpecialMoveStrength() {
         return specialMoveStrength;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getSpecialMove() {

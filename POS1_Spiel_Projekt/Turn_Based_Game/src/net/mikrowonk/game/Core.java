@@ -64,7 +64,7 @@ public class Core {
                 Enemy enemy = new Enemy();
                 Fight f = new Fight(enemy, player);
                 f.fight();
-                if (f.getWon()) {
+                if (f.getHasWon()) {
                     allEnemies.add(enemy);
                 }
                 showMenu();
@@ -149,9 +149,7 @@ public class Core {
                 case 4:
                     player.setPointsSpent(player.getPointsSpent() + 1);
                     System.out.println("Your Pokemons new Name: ");
-                    String newName = scan.next();
-
-                    player.changeName(newName);
+                    player.setName(scan.next());
                 default:
             }
         }
@@ -178,7 +176,7 @@ public class Core {
         Enemy enemy = allEnemies.get(decision);
         Fight f = new Fight(enemy, player);
         f.fight();
-        if (f.getWon()) {
+        if (f.getHasWon()) {
             allEnemies.add(enemy);
         }
     }

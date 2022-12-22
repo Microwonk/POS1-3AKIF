@@ -26,8 +26,7 @@ public class Starting {
 
         if (savingChoice == 2) {
             try {
-                Save s = new Save();
-                player = (Player)s.getPlayerSave();
+                player = new Save().getPlayerSave();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,10 +37,8 @@ public class Starting {
         System.out.println("<Opening character selection, please view>");
 
         // opening the stat preview of all characters
-
-        File f = new File("src/net/mikrowonk/assets/Fighters.txt");
         try {
-            d.open(f);
+            d.open(new File("src/net/mikrowonk/assets/Fighters.txt"));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -66,16 +63,14 @@ public class Starting {
 
         // opening the preview of the chosen character
 
-        File fighter = new File("src/net/mikrowonk/assets/"+ type +".png");
-
         try {
-            d.open(fighter);
+            d.open(new File("src/net/mikrowonk/assets/"+ type +".png"));
         }
         catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.print("Now give your Pokemon a name:");
+        System.out.print("Now give your Pokemon a name: ");
         name = scan.next();
         System.out.println();
 

@@ -1,1 +1,1 @@
-2 20 22 Thunder Pikachu 45 4 95
+20 22 Thunder Bruh 45 3 2 50

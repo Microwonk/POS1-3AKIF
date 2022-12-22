@@ -11,7 +11,7 @@ public class Fight {
     private final int playerMaxHealth;
     private final int enemyMaxHealth;
     private boolean usedSpecialAttack;
-    private boolean won;
+    private boolean hasWon;
 
     public Fight(Enemy enemy, Player player) {
         this.enemy = enemy;
@@ -61,7 +61,7 @@ public class Fight {
                 scrollText("<Be more prepared next Time>");
                 Core.player.levelUp(-xp);
                 scrollText("<" + xp + " XP lost>");
-                this.won = false;
+                this.hasWon = false;
 
                 //resets the health after every fight
                 this.player.health = playerMaxHealth;
@@ -86,7 +86,7 @@ public class Fight {
                 scrollText("<You win!>");
                 Core.player.levelUp(xp);
                 scrollText("<" + xp + " XP received>");
-                this.won = true;
+                this.hasWon = true;
                 this.player.health = playerMaxHealth;
                 this.enemy.health = enemyMaxHealth;
                 return;
@@ -96,7 +96,7 @@ public class Fight {
                 scrollText("<You lose!>");
                 Core.player.levelUp(-xp);
                 scrollText("<" + xp + " XP lost>");
-                this.won = false;
+                this.hasWon = false;
                 this.player.health = playerMaxHealth;
                 this.enemy.health = enemyMaxHealth;
                 return;
@@ -225,6 +225,7 @@ public class Fight {
                 System.out.println(text.charAt(i));
             }
             try {
+                //noinspection BusyWait
                 Thread.sleep(70);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -244,7 +245,7 @@ public class Fight {
     }
 
     // checks, if the player won, if so, then the instance of the enemy is saved to the list of beaten Enemies
-    public boolean getWon () {
-        return won;
+    public boolean getHasWon() {
+        return hasWon;
     }
 }

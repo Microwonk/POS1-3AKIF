@@ -1,7 +1,6 @@
 package net.mikrowonk.game;
 
-public class Entity {
-
+public abstract class Entity {
     protected int strength;
     protected int health;
     protected String name;
@@ -46,5 +45,9 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
