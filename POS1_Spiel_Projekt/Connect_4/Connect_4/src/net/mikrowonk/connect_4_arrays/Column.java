@@ -1,4 +1,4 @@
-package net.mikrowonk.connect_4;
+package net.mikrowonk.connect_4_arrays;
 
 public class Column {
 

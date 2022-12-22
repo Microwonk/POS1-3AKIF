@@ -1,5 +1,4 @@
-package net.mikrowonk.connect_4;
-
+package net.mikrowonk.connect_4_arrays;
 
 public class Main {
     public static Game game = new Game();

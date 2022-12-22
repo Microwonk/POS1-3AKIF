@@ -1,4 +1,4 @@
-package net.mikrowonk.connect_4;
+package net.mikrowonk.connect_4_arrays;
 
 import java.util.ArrayList;
 import java.util.List;
