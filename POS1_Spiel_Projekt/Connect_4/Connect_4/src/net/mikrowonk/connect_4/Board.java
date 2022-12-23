@@ -1,12 +1,11 @@
 package net.mikrowonk.connect_4;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Board {
-    private final int lines;
-    private final int columns;
-    private String[][] boardMatrix;
+    protected final int lines;
+    protected final int columns;
+    protected String[][] boardMatrix;
     private int[] coinsPutPerColumn;
 
 
@@ -28,7 +27,11 @@ public class Board {
 
     public void showBoard() {
         for (int i = lines - 1; i >= 0 ; i--) {
-            System.out.println(Arrays.toString(boardMatrix[i]));
+            int j = 0;
+            for (; j < columns; j++) {
+                System.out.print(boardMatrix[i][j] + "  ");
+            }
+            System.out.println();
         }
     }
 
@@ -43,6 +46,11 @@ public class Board {
         coinsPutPerColumn[column]++;
     }
 
+    public void undoMove(int column) {
+        this.boardMatrix[coinsPutPerColumn[column] - 1][column] = "o";
+        coinsPutPerColumn[column]--;
+    }
+
     public int getCoinsPutPerColumn(int index) {
         return coinsPutPerColumn[index];
     }
@@ -55,15 +63,11 @@ public class Board {
         return lines;
     }
 
-    public String[][] getBoardMatrix() {
-        return boardMatrix;
-    }
-
     public boolean hasWon(String sign) {
         // horizontalCheck
         for (int j = 0; j < columns-3 ; j++ ){
             for (int i = 0; i< lines; i++){
-                if (this.boardMatrix[i][j] == sign && this.boardMatrix[i][j+1] == sign && this.boardMatrix[i][j+2] == sign && this.boardMatrix[i][j+3] == sign){
+                if (this.boardMatrix[i][j].equals(sign) && this.boardMatrix[i][j + 1].equals(sign) && this.boardMatrix[i][j + 2].equals(sign) && this.boardMatrix[i][j + 3].equals(sign)){
                     return true;
                 }
             }
@@ -71,7 +75,7 @@ public class Board {
         // verticalCheck
         for (int i = 0; i<columns-3 ; i++ ){
             for (int j = 0; j<this.lines; j++){
-                if (this.boardMatrix[i][j] == sign && this.boardMatrix[i+1][j] == sign && this.boardMatrix[i+2][j] == sign && this.boardMatrix[i+3][j] == sign){
+                if (this.boardMatrix[i][j].equals(sign) && this.boardMatrix[i + 1][j].equals(sign) && this.boardMatrix[i + 2][j].equals(sign) && this.boardMatrix[i + 3][j].equals(sign)){
                     return true;
                 }
             }
@@ -79,14 +83,15 @@ public class Board {
         // ascendingDiagonalCheck
         for (int i=3; i<columns; i++){
             for (int j=0; j<lines-3; j++){
-                if (this.boardMatrix[i][j] == sign && this.boardMatrix[i-1][j+1] == sign && this.boardMatrix[i-2][j+2] == sign && this.boardMatrix[i-3][j+3] == sign)
+                if (this.boardMatrix[i][j].equals(sign) && this.boardMatrix[i-1][j+1].equals(sign) && this.boardMatrix[i-2][j+2].equals(sign) && this.boardMatrix[i-3][j+3].equals(sign)) {
                     return true;
+                }
             }
         }
         // descendingDiagonalCheck
         for (int i=3; i<columns; i++){
             for (int j=3; j<lines; j++){
-                if (this.boardMatrix[i][j] == sign && this.boardMatrix[i-1][j-1] == sign && this.boardMatrix[i-2][j-2] == sign && this.boardMatrix[i-3][j-3] == sign)
+                if (this.boardMatrix[i][j].equals(sign) && this.boardMatrix[i - 1][j - 1].equals(sign) && this.boardMatrix[i - 2][j - 2].equals(sign) && this.boardMatrix[i - 3][j - 3].equals(sign))
                     return true;
             }
         }

@@ -3,9 +3,9 @@ package net.mikrowonk.connect_4;
 import java.util.Scanner;
 
 public class Game {
-    public Board board;
-    public Game() {
-        board = new Board(6, 6);
+    private Board board;
+    public Game(int lines, int columns) {
+        board = new Board(lines, columns);
     }
 
     public void startGame() {
@@ -28,8 +28,16 @@ public class Game {
                 System.out.println("You won!");
                 return;
             }
-            Opponent opp = new Opponent(true);
-            opp.makeNextMove(board);
+            Opponent opp = new Opponent(this.board);
+            if (opp.checkForLosing() != -1) {
+                board.decideMove(false, opp.checkForLosing());
+            }
+            if (opp.checkForWinning() != -1) {
+                board.decideMove(false, opp.checkForWinning());
+            }
+            else {
+                board.decideMove(false, opp.randomMove());
+            }
             if (board.hasWon("E")){
                 board.showBoard();
                 System.out.println("You lost!");
