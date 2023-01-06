@@ -1,6 +1,11 @@
 import java.math.BigInteger;
 import java.util.Scanner;
-import java.io.*;
+
+import javax.sound.sampled.SourceDataLine;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class FindingDeletables {
 
@@ -50,7 +55,7 @@ public class FindingDeletables {
             
                 if (ways > 0) {
                     //Faulty code, sometimes the ways aren't counted correctly, please rely on my Theorie/Kap.5/DeletablePrimes Program to find out the ways for the given number(s)
-                    outPrint.println(ways + " way(s) for: " + res);
+                    System.out.println(ways + " way(s) for: " + res);
                 }
                 if (ways > maxWays) {
                     maxWays = ways;
@@ -73,7 +78,7 @@ public class FindingDeletables {
         
         //Faulty code, the Ways are not accurate enough (+- 1 - 2)
 
-        outPrint.println("The maximum amount of ways in the range 0-" + restrictor + " was " + maxWays + " with the smallest number of " + maxDeletablePrime + "(the Ways may vary +- 1-2, please refer to DeletablePrimes.java to check the ways)");
+        System.out.println("The maximum amount of ways in the range 0-" + restrictor + " was " + maxWays + " with the smallest number of " + maxDeletablePrime + "(the Ways may vary +- 1-2, please refer to DeletablePrimes.java to check the ways)");
         
      }
 }

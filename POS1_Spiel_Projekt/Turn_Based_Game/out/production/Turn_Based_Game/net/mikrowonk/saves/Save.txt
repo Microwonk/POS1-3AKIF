@@ -1,1 +1,1 @@
-20 22 Thunder Bruh 45 3 2 50
+21 24 Thunder Bruh 50 3 0 5
