@@ -15,15 +15,23 @@ public class Game {
         int columnIndex;
         while (true) {
             board.showBoard();
-            System.out.println("Column eingeben: ");
+            System.out.println("P: Column eingeben: ");
             columnIndex = scan.nextInt();
             board.dropCoin("P", columnIndex);
             if (board.checkForWin("P")) {
                 board.showBoard();
-                System.out.println("You Won!");
-                //return;
+                System.out.println("P Won!");
+                return;
             }
-
+            board.showBoard();
+            System.out.println("E: Columns eingeben:");
+            columnIndex = scan.nextInt();
+            board.dropCoin("E", columnIndex);
+            if (board.checkForWin(("E"))) {
+                board.showBoard();
+                System.out.println("E Won!");
+                return;
+            }
         }
     }
 }
