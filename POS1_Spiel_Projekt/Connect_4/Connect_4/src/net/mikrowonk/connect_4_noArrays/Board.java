@@ -14,7 +14,7 @@ public class Board {
         this.boardMatrix = new ArrayList<>();
         int countLines = this.lines;
         for (int i = 0; i < columns * lines; i++) {
-            this.boardMatrix.add(new Field(countLines, i % columns, "o", false));
+            this.boardMatrix.add(new Field(countLines, (int)(i % columns), "o", false));
             if (i % columns == 0) {
                 countLines--;
             }
