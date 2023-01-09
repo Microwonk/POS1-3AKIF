@@ -1,11 +1,6 @@
 import java.math.BigInteger;
 import java.util.Scanner;
-
-import javax.sound.sampled.SourceDataLine;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class FindingDeletables {
 
