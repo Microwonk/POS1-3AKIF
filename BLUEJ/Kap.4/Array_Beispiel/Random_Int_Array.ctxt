@@ -6,4 +6,6 @@ comment2.params=
 comment2.target=void\ fillArray()
 comment3.params=
 comment3.target=void\ showArray()
-numComments=4
+comment4.params=zahl
+comment4.target=java.lang.String\ calcSpaces(int)
+numComments=5
