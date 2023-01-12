@@ -6,8 +6,7 @@ public class Lotto {
         int zufallszahl;
 
         for (int i = 0; i < 6; i++) {
-            zufallszahl = rand.nextInt(1, 45);
-            //zufallszahl = rand.nextInt(45) + 1;
+            zufallszahl = rand.nextInt(1, 46);
             System.out.println(zufallszahl);
         }
     }
