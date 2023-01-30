@@ -4,14 +4,11 @@ import java.io.*;
 
 public class FindingDeletables {
 
-
-    static File delPrimes = new File ("C:/Users/gschm/Documents/GitHub/POS1-3AKIF/Theorie/Kap. 5/delPrimes.txt");
-    static PrintWriter outPrint = new PrintWriter(delPrimes);
     static int ways = 0;
     static int maxWays = 0;
     static String maxDeletablePrime;
 
-    private static String removeByIndex(String primeNumber, int index) throws IOException {
+    private static String removeByIndex(String primeNumber, int index) {
         return new StringBuilder(primeNumber).deleteCharAt(index).toString();
      }
 
@@ -39,7 +36,7 @@ public class FindingDeletables {
         }
     }
     
-    private static void iteratePrimes (long maxPrime) throws IOException {
+    private static void iteratePrimes (long maxPrime) {
         String prime;
         long res = 13;
         
